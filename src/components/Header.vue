@@ -62,6 +62,8 @@
         data() {
             return {
                 loggedIn: false,
+                showLogin: false,
+                showRegister: false,
                 locales: [
                     {name: this.$t('English'), value: 'en'},
                     {name: this.$t('Spanish'), value: 'es'},
@@ -75,7 +77,7 @@
               this.$cookie.set('locale', locale, 365);
           },
             logout() {
-                console.log('ToDo')
+                console.log('ToDo');
             },
         },
     };
