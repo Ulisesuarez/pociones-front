@@ -1,0 +1,30 @@
+import Services from '@/services';
+import i18n from '@/i18n';
+import store from '@/store/store';
+import axios from 'axios';
+import Vue from 'vue';
+
+// const baseURL = `${protocol}://${hostname}:${port}/api/`;
+const baseURL = `http://algo:8081/api/`;
+const instance = axios.create({ baseURL });
+
+instance.interceptors.response.use((data) => data, (error) => {
+    if (error.response.status === 401) {
+        const url = new URL(error.config.url);
+        if (url.pathname !== '/api/auth/login') {
+            Vue.notify({
+                title: i18n.t('session_expired.title'),
+                text:  i18n.t('session_expired.text'),
+                type: 'warning',
+            });
+        }
+        store.dispatch('session/logout');
+    }
+
+    return Promise.reject(error);
+});
+
+
+Vue.use(Services, { axios: instance });
+
+export default instance;
