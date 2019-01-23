@@ -21,11 +21,11 @@
                 </v-list-tile>
             </v-list>
         </v-menu>
-        <v-btn @click="showLogin=!showLogin" v-if="!loggedIn" flat>
+        <v-btn @click="showDialog('login')" v-if="!loggedIn" flat>
             Login
         </v-btn>
 
-        <v-btn @click="showRegister=!showRegister" v-if= "!loggedIn" flat>
+        <v-btn @click="showDialog('register')" v-if= "!loggedIn" flat>
             {{$t('Register')}}
         </v-btn>
         <v-menu offset-y>
@@ -50,9 +50,6 @@
             </v-list-tile>
         </v-list>
         </v-menu>
-
-
-
     </v-toolbar>
 </template>
 
@@ -72,6 +69,22 @@
             };
         },
         methods: {
+          showDialog(dialog){
+              switch (dialog){
+                  case 'login':{
+                      this.showLogin = !this.showLogin
+                      this.showRegister = false
+                     break;
+                  }
+
+                  case 'register':{
+                      this.showRegister = !this.showRegister
+                      this.showLogin = false
+                      break;
+                  }
+              }
+
+          },
           changeLocale(locale) {
               this.$i18n.locale = locale;
               this.$cookie.set('locale', locale, 365);
