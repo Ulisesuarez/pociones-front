@@ -50,8 +50,12 @@
             </v-list-tile>
         </v-list>
         </v-menu>
-
+<<<<<<< HEAD
          <login v-bind:show="showLogin"></login>
+
+
+=======
+>>>>>>> development
     </v-toolbar>
 </template>
 

@@ -2,6 +2,7 @@ const Services = ({ axios }: any) => ({
     auth: {
         login: (payload: object) => axios.post('auth/login', payload),
         logout: () => axios.post('auth/logout'),
+        register: (payload: object) => axios.post('auth/register', payload),
     },
     potions: {
         get: (id: any) => axios.get(`potion/${id}`),
