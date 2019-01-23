@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-dialog
-      v-model="dialog"
+      v-model="show"
       width="500"
      
     >
@@ -67,9 +67,15 @@
 <script>
   export default {
       name: 'login',
+      props: {
+        show:{type: Boolean, default: false,},
+      },
     data () {
       return {
-        dialog: false,
+        valid: false,
+        Usuario:'',
+        Password:'',
+        nameRules:[],
       };
     }
   };

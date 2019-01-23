@@ -50,15 +50,17 @@
             </v-list-tile>
         </v-list>
         </v-menu>
-
+         <login v-bind:show="showLogin"></login>
 
 
     </v-toolbar>
 </template>
 
 <script>
+import Login from "@/components/Login"
     export default {
         name: 'custom-header',
+        components: {Login,},
         data() {
             return {
                 loggedIn: false,

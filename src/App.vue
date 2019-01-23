@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <custom-header></custom-header>
-      <login></login>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -10,13 +9,11 @@
 
 <script>
 import CustomHeader from './components/Header';
-import Login from './components/Login';
 
 export default {
   name: 'App',
   components: {
     CustomHeader,
-    Login,
   },
   data() {
     return {
