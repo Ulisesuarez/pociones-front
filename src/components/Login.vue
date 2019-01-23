@@ -5,14 +5,6 @@
       width="500"
      
     >
-      <v-btn
-        slot="activator"
-        color="deep-purple lighten-1"
-        dark
-      >
-       Log in
-      </v-btn>
-
       <v-card>
       <v-form v-model="valid">
     <v-container>
