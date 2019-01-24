@@ -6,7 +6,7 @@
      
     >
       <v-card>
-      <v-form v-model="valid">
+      <v-form v-model="valid" lazy-validation>
     <v-container>
       <v-layout wrap>
         <v-flex
@@ -27,9 +27,10 @@
           d-flex
         >
           <v-text-field
-            v-model="Password"
+            v-model="password"
             :rules="nameRules"
             :counter="20"
+            :error-messages="passErrors"
             type= password
             label="Contraseña"
             required
@@ -44,9 +45,16 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
+                  color="gray"
+                  flat
+                  @click="cancel"
+          >
+            Close
+          </v-btn>
+          <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="accept"
           >
            Login
           </v-btn>
@@ -59,17 +67,45 @@
 <script>
   export default {
       name: 'login',
-      props: {
-        show:{type: Boolean, default: false,},
-      },
-    data () {
+    data() {
       return {
         valid: false,
-        Usuario:'',
-        Password:'',
-        nameRules:[],
+        Usuario: '',
+        loginShow: true,
+        password: '',
+        passErrors: [],
+        nameRules: [ () => {
+            return !!this.password || this.$t('Register');
+        }],
       };
-    }
+    },
+      computed: {
+          show: {
+              get() {
+                  return this.loginShow;
+              },
+              set() {
+                  this.loginShow = !this.loginShow;
+                  const show =  this.loginShow;
+                  if (!show) {
+                      this.$root.$emit('closeLogin');
+                  }
+                  return show;
+
+              },
+          },
+      },
+      methods: {
+          accept() {
+              console.log('accept');
+              console.log(this.$root);
+              this.$root.$emit('closeLogin');
+          },
+          cancel() {
+              console.log('cancel');
+              this.$root.$emit('closeLogin');
+          },
+      },
   };
 </script>
 

@@ -51,53 +51,62 @@
         </v-list>
         </v-menu>
 
-         <login v-bind:show="showLogin"></login>
+         <login v-if="showLogin"></login>
     </v-toolbar>
 </template>
 
 <script>
-import Login from "@/components/Login"
-    export default {
-        name: 'custom-header',
-        components: {Login,},
-        data() {
-            return {
-                loggedIn: false,
-                showLogin: false,
-                showRegister: false,
-                locales: [
-                    {name: this.$t('English'), value: 'en'},
-                    {name: this.$t('Spanish'), value: 'es'},
-                ],
-                user: { userName: 'Ulises'},
-            };
-        },
-        methods: {
-          showDialog(dialog){
-              switch (dialog){
-                  case 'login':{
-                      this.showLogin = !this.showLogin
-                      this.showRegister = false
-                     break;
-                  }
-
-                  case 'register':{
-                      this.showRegister = !this.showRegister
-                      this.showLogin = false
-                      break;
-                  }
+import Login from '@/components/Login';
+export default {
+    name: 'custom-header',
+    components: {Login},
+    data() {
+        return {
+            loggedIn: false,
+            showLogin: false,
+            showRegister: false,
+            locales: [
+                {name: this.$t('English'), value: 'en'},
+                {name: this.$t('Spanish'), value: 'es'},
+            ],
+            user: { userName: 'Ulises'},
+        };
+    },
+    mounted() {
+      this.$root.$on('closeLogin', () => {
+          console.log('hey');
+          this.showLogin = false;
+      });
+    },
+    beforeDestroy() {
+        this.$off('closeLogin');
+    },
+    methods: {
+      showDialog(dialog) {
+          switch (dialog) {
+              case 'login': {
+                  this.showLogin = !this.showLogin;
+                  this.showRegister = false;
+                  break;
               }
 
-          },
-          changeLocale(locale) {
-              this.$i18n.locale = locale;
-              this.$cookie.set('locale', locale, 365);
-          },
-            logout() {
-                console.log('ToDo');
-            },
+              case 'register': {
+                  this.showRegister = !this.showRegister;
+                  this.showLogin = false;
+                  break;
+              }
+          }
+
+      },
+      changeLocale(locale) {
+          this.$i18n.locale = locale;
+          this.$cookie.set('locale', locale, 365);
+      },
+        logout() {
+            console.log('ToDo');
         },
-    };
+    },
+};
 </script>
 
 <style scoped>
