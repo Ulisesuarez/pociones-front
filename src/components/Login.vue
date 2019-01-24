@@ -1,0 +1,114 @@
+<template>
+  <div class="text-xs-center">
+    <v-dialog
+      v-model="show"
+      width="500"
+     
+    >
+      <v-card>
+      <v-form v-model="valid" lazy-validation>
+    <v-container>
+      <v-layout wrap>
+        <v-flex
+          xs12
+           d-flex
+        >
+          <v-text-field
+            v-model="Usuario"
+            :rules="nameRules"
+            :counter="20"
+            label="Usuario"
+            required
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex
+          xs12
+          d-flex
+        >
+          <v-text-field
+            v-model="password"
+            :rules="nameRules"
+            :counter="20"
+            :error-messages="passErrors"
+            type= password
+            label="Contraseña"
+            required
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-form>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+                  color="gray"
+                  flat
+                  @click="cancel"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="primary"
+            flat
+            @click="accept"
+          >
+           Login
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script>
+  export default {
+      name: 'login',
+    data() {
+      return {
+        valid: false,
+        Usuario: '',
+        loginShow: true,
+        password: '',
+        passErrors: [],
+        nameRules: [ () => {
+            return !!this.password || this.$t('Register');
+        }],
+      };
+    },
+      computed: {
+          show: {
+              get() {
+                  return this.loginShow;
+              },
+              set() {
+                  this.loginShow = !this.loginShow;
+                  const show =  this.loginShow;
+                  if (!show) {
+                      this.$root.$emit('closeLogin');
+                  }
+                  return show;
+
+              },
+          },
+      },
+      methods: {
+          accept() {
+              console.log('accept');
+              console.log(this.$root);
+              this.$root.$emit('closeLogin');
+          },
+          cancel() {
+              console.log('cancel');
+              this.$root.$emit('closeLogin');
+          },
+      },
+  };
+</script>
+
+<style scoped>
+
+</style>
