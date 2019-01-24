@@ -12,12 +12,30 @@ const Services = ({ axios }: any) => ({
         addToFavorites: (id: any) => axios.put(`potion/${id}`),
     },
     generic: {
-        get: (endpoint: string) => axios.get(endpoint),
-        post: (endpoint: string) => axios.get(endpoint),
-        put: (endpoint: string, payload: object) => axios.get(endpoint),
-        delete: (endpoint: string) => axios.get(endpoint),
+        get: (params: any) => axios({
+            method: 'GET',
+            url: params.endpoint,
+            params: params.params,
+            data: params.data,
+        }),
+        put: (endpoint: string, data: any) => axios({
+            method: 'PUT',
+            url: endpoint,
+            data,
+        }),
+        post: (endpoint: string, data: any) => axios({
+            method: 'POST',
+            url: endpoint,
+            data,
+        }),
+        search: (endpoint: string, ...params: any[]) => axios.get(endpoint, ...params),
+        delete: (endpoint: string) => axios({
+            method: 'DELETE',
+            url: endpoint,
+        }),
     },
-});
+    });
+
 
 export default Services;
 

@@ -69,17 +69,17 @@
             };
         },
         methods: {
-          showDialog(dialog){
-              switch (dialog){
-                  case 'login':{
-                      this.showLogin = !this.showLogin
-                      this.showRegister = false
-                     break;
+          showDialog(dialog) {
+              switch (dialog) {
+                  case 'login': {
+                      this.showLogin = !this.showLogin;
+                      this.showRegister = false;
+                      break;
                   }
 
-                  case 'register':{
-                      this.showRegister = !this.showRegister
-                      this.showLogin = false
+                  case 'register': {
+                      this.showRegister = !this.showRegister;
+                      this.showLogin = false;
                       break;
                   }
               }
