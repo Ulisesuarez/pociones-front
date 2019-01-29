@@ -2,5 +2,9 @@
   "English":"English",
   "logout": "Logout",
   "Register":"Register",
-  "Spanish":"Español"
+  "Spanish":"Español",
+  "Username Required":"Username Required",
+  "Password Required":"Password Required",
+  "Username":"Username",
+  "Password":"Password"
 }

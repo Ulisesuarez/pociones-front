@@ -2,6 +2,10 @@
   "English":"English",
   "logout": "Salir",
   "Register":"Registrar",
-  "Spanish":"Español"
+  "Spanish":"Español",
+  "Username Required":"Usuario Requerido",
+  "Password Required":"Contraseña Requerida",
+  "Username":"Usuario",
+  "Password":"Contraseña"
 
 }
