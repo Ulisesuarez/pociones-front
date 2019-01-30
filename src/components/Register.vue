@@ -22,8 +22,7 @@
           <v-text-field
             v-model="name"
             :rules="nameRules"
-            :counter="10"
-            label="Name"
+            v-bind:label="$t('Username')"
             required
           ></v-text-field>
         </v-flex>
@@ -35,7 +34,7 @@
           <v-text-field
             v-model="email"
             :rules="emailRules"
-            label="E-mail"
+            v-bind:label="$t('Email')"
             required
           ></v-text-field>
         </v-flex>
@@ -46,8 +45,8 @@
         >
           <v-text-field
             v-model="emailRepeat"
-            :rules="emailRules"
-            label="Repeat E-mail"
+            :rules="repeatEmailRules"
+            v-bind:label="$t('Repeat Email')"
             required
           ></v-text-field>
         </v-flex>
@@ -60,7 +59,7 @@
             v-model="password"
             :rules="passwordRules"
             type= password
-            label="Password"
+            v-bind:label="$t('Password')"
             required
           ></v-text-field>
         </v-flex>
@@ -71,9 +70,9 @@
         >
           <v-text-field
             v-model="repeatPassword"
-            :rules="testRulz"
+            :rules="repeatPasswordRules"
             type= password
-            label="Repeat password"
+            v-bind:label="$t('Repeat password')"
             required
           ></v-text-field>
         </v-flex>
@@ -108,31 +107,33 @@
       name: '',
       nameRules: [
         v => {
-          return !!v || this.$t('Register')},
-        v => v.length <= 10 || 'Name must be less than 10 characters'
+          return !!v || this.$t('Validators.requiredName')},
+        v => v.length >= 5 || this.$t('Validators.nameLength')
       ],
       email: '',
       emailRepeat: '',
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
+        v => !!v || this.$t('Validators.requiredEmail'),
+        v => /.+@.+/.test(v) || this.$t('Validators.validEmail'),
+      ],
+      repeatEmailRules: [
         () => {
-          return   this.email === this.emailRepeat || 'The emails you entered donesn\'t match';
+          return this.email === this.emailRepeat || this.$t('Validators.emailMatch');
         }
       ],
       password: '',
       repeatPassword: '',
       passwordRules: [
-        v => !!v || 'Password is required',
+        v => !!v || this.$t('Validators.requiredPassword'),
+      ],
+      repeatPasswordRules: [
+        () => {
+          return this.password === this.repeatPassword || this.$t('Validators.passwordMatch');
+        }
       ]
       }
     },
     computed: {
-      testRulz(){
-        let t=this.nameRules;
-        t.push(this.checkEmail);
-        return t;
-      },
       show: {
         get() {
           return this.registerShow;
@@ -147,18 +148,6 @@
         }
       }
     },
-    methods:{
-       checkEmail() {
-        if(this.email !== this.emailRepeat) {
-          return 'The emails you entered donesn\'t match';
-        }
-      },
-      checkPassword() {
-        if(this.password !== this.repeatPassword) {
-          return 'The passwords you entered donesn\'t match';
-        }
-      }
-    }
     };
 </script>
 
