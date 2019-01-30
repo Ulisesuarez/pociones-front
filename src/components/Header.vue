@@ -52,14 +52,17 @@
         </v-menu>
 
          <login v-if="showLogin"></login>
+         <register v-if="showRegister"></register>
     </v-toolbar>
 </template>
 
 <script>
 import Login from '@/components/Login';
+import Register from '@/components/Register';
 export default {
     name: 'custom-header',
-    components: {Login},
+    components: {Login,
+                 Register},
     data() {
         return {
             loggedIn: false,
@@ -77,9 +80,14 @@ export default {
           console.log('hey');
           this.showLogin = false;
       });
+      this.$root.$on('closeRegister', () => {
+          console.log('hey');
+          this.showRegister = false;
+      });
     },
     beforeDestroy() {
-        this.$off('closeLogin');
+        this.$root.$off('closeLogin');
+        this.$root.$off('closeRegister');
     },
     methods: {
       showDialog(dialog) {
