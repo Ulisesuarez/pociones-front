@@ -15,9 +15,9 @@
         >
           <v-text-field
             v-model="Usuario"
-            :rules="nameRules"
+            :rules="nameRulesU"
             :counter="20"
-            label="Usuario"
+            v-bind:label="$t('Username')"
             required
           ></v-text-field>
         </v-flex>
@@ -28,11 +28,11 @@
         >
           <v-text-field
             v-model="password"
-            :rules="nameRules"
+            :rules="nameRulesP"
             :counter="20"
             :error-messages="passErrors"
             type= password
-            label="Contraseña"
+            v-bind:label="$t('Password')"
             required
           ></v-text-field>
         </v-flex>
@@ -74,8 +74,11 @@
         loginShow: true,
         password: '',
         passErrors: [],
-        nameRules: [ () => {
-            return !!this.password || this.$t('Register');
+        nameRulesU: [ () => {
+            return !!this.Usuario || this.$t('Username Required');
+        }],
+         nameRulesP: [ () => {
+            return !!this.password || this.$t('Password Required');
         }],
       };
     },
