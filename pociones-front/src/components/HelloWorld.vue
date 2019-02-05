@@ -140,7 +140,7 @@
       ],
     }),
       mounted() {
-          this.$services.generic.get('https://jsonplaceholder.typicode.com/posts/1')
+          this.$services.generic.get({ endpoint: 'https://jsonplaceholder.typicode.com/posts/1'})
               .then((response) => console.log(response));
       },
   };
