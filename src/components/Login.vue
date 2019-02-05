@@ -100,12 +100,11 @@
       },
       methods: {
           accept() {
-              console.log('accept');
-              console.log(this.$root);
+              this.$services.auth.login({userName:this.userName, password:this.password})
+
               this.$root.$emit('closeLogin');
           },
           cancel() {
-              console.log('cancel');
               this.$root.$emit('closeLogin');
           },
       },
