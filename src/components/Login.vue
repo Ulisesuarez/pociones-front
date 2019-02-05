@@ -49,7 +49,7 @@
                   flat
                   @click="cancel"
           >
-            Close
+            {{$t('Close')}}
           </v-btn>
           <v-btn
             color="primary"
@@ -100,12 +100,9 @@
       },
       methods: {
           accept() {
-              console.log('accept');
-              console.log(this.$root);
               this.$root.$emit('closeLogin');
           },
           cancel() {
-              console.log('cancel');
               this.$root.$emit('closeLogin');
           },
       },

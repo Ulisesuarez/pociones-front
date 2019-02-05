@@ -9,7 +9,7 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Sign Up
+          {{$t('Register')}}
         </v-card-title>
 
         <v-form v-model="valid">
@@ -87,9 +87,16 @@
           <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="accept"
           >
-            I accept
+            {{$t('Register')}}
+          </v-btn>
+          <v-btn
+            color="gray"
+            flat
+            @click="cancel"
+          >
+            {{$t('Close')}}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -100,38 +107,38 @@
 <script>
     export default {
         name: 'register',
-        data(){
+        data() {
           return {
-      registerShow: true,    
+      registerShow: true,
       valid: false,
       name: '',
       nameRules: [
-        v => {
-          return !!v || this.$t('Validators.requiredName')},
-        v => v.length >= 5 || this.$t('Validators.nameLength')
+        (v) => {
+          return !!v || this.$t('Validators.requiredName'); },
+        (v) => v.length >= 5 || this.$t('Validators.nameLength'),
       ],
       email: '',
       emailRepeat: '',
       emailRules: [
-        v => !!v || this.$t('Validators.requiredEmail'),
-        v => /.+@.+/.test(v) || this.$t('Validators.validEmail'),
+        (v) => !!v || this.$t('Validators.requiredEmail'),
+        (v) => /.+@.+/.test(v) || this.$t('Validators.validEmail'),
       ],
       repeatEmailRules: [
         () => {
           return this.email === this.emailRepeat || this.$t('Validators.emailMatch');
-        }
+        },
       ],
       password: '',
       repeatPassword: '',
       passwordRules: [
-        v => !!v || this.$t('Validators.requiredPassword'),
+        (v) => !!v || this.$t('Validators.requiredPassword'),
       ],
       repeatPasswordRules: [
         () => {
           return this.password === this.repeatPassword || this.$t('Validators.passwordMatch');
-        }
-      ]
-      }
+        },
+      ],
+      };
     },
     computed: {
       show: {
@@ -145,9 +152,17 @@
             this.$root.$emit('closeRegister');
           }
           return show;
-        }
-      }
+        },
+      },
     },
+    methods: {
+          accept() {
+              this.$root.$emit('closeRegister');
+          },
+          cancel() {
+              this.$root.$emit('closeRegister');
+          },
+      },
     };
 </script>
 

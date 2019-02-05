@@ -165,13 +165,10 @@ export default {
     },
     mounted() {
       window.addEventListener('resize', this.refreshViewport);
-      console.log(this.viewport);
       this.$root.$on('closeLogin', () => {
-          console.log('hey');
           this.showLogin = false;
       });
       this.$root.$on('closeRegister', () => {
-          console.log('hey');
           this.showRegister = false;
       });
     },
