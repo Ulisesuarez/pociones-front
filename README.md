@@ -1,11 +1,8 @@
 Trabajo realizado por
 ===
-- Sergio Jiménez Sastre
-- Valentín Dieguez Crespi
-- Lázaro Cuenca Poyatos
-- Ulises Bruno Suárez
-- Daniel Juan Barbosa
-- Adrián Ponce Cano
+- Sergio Jiménez Sastre                           - Ulises Bruno Suárez
+- Valentín Dieguez Crespi                         - Daniel Juan Barbosa
+- Lázaro Cuenca Poyatos                           - Adrián Ponce Cano
 
 # Proyecto potionsback: Gestión y administración de pociones
 ## Introducción
