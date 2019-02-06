@@ -56,6 +56,7 @@
         </v-menu>
 
          <login v-if="showLogin"></login>
+         <register v-if="showRegister"></register>
     </v-toolbar>
 
         <v-toolbar id="mobileToolbar" v-show="$vuetify.breakpoint.xsOnly" app>
@@ -140,9 +141,11 @@
 
 <script>
 import Login from '@/components/Login';
+import Register from '@/components/Register';
 export default {
     name: 'custom-header',
-    components: {Login},
+    components: {Login,
+                 Register},
     data() {
         return {
             loggedIn: false,
@@ -162,14 +165,16 @@ export default {
     },
     mounted() {
       window.addEventListener('resize', this.refreshViewport);
-      console.log(this.viewport);
       this.$root.$on('closeLogin', () => {
-          console.log('hey');
           this.showLogin = false;
+      });
+      this.$root.$on('closeRegister', () => {
+          this.showRegister = false;
       });
     },
     beforeDestroy() {
-        this.$off('closeLogin');
+        this.$root.$off('closeLogin');
+        this.$root.$off('closeRegister');
         window.removeEventListener('resize', this.refreshViewport);
     },
     methods: {

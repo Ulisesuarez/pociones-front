@@ -2,10 +2,21 @@
   "English":"English",
   "logout": "Salir",
   "Register":"Registrar",
+  "Close":"Cerrar",
   "Spanish":"Español",
   "Username Required":"Usuario Requerido",
   "Password Required":"Contraseña Requerida",
   "Username":"Usuario",
-  "Password":"Contraseña"
-
+  "Password":"Contraseña",
+  "Repeat Email": "Repetir Email",
+  "Repeat password": "Repetir contraseña",
+  "Validators": {
+    "requiredName": "El nombre es requerido",
+    "nameLength": "El nombre debe tener al menos 5 caracteres",
+    "requiredEmail": "El E-mailes requerido",
+    "validEmail": "Debes introducir un E-mail válido",
+    "emailMatch": "Los E-mails introducidos no coinciden",
+    "requiredPassword": "La contraseña es requerida",
+    "passwordMatch": "Las contraseñas introducidas no coinciden"
+}
 }

@@ -49,7 +49,7 @@
                   flat
                   @click="cancel"
           >
-            Close
+            {{$t('Close')}}
           </v-btn>
           <v-btn
             color="primary"
