@@ -1,5 +1,5 @@
-Trabajo realizado por
-===
+### Trabajo realizado por
+
 - Sergio Jiménez Sastre
 - Ulises Bruno Suárez 
 - Valentín Dieguez Crespi
