@@ -43,6 +43,9 @@
         <v-divider></v-divider>
 
         <v-card-actions>
+                  <a @click="forgottenPassword"
+          style="float: right; position: relative"
+        >{{$t('ForgottenPassword')}}</a>
           <v-spacer></v-spacer>
           <v-btn
                   color="gray"
@@ -107,6 +110,10 @@
           cancel() {
               this.$root.$emit('closeLogin');
           },
+          forgottenPassword() {
+            this.$root.$emit('openForgottenPassword');
+            this.$root.$emit('closeLogin');
+          }
       },
   };
 </script>
