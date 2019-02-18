@@ -6,6 +6,13 @@
   "Username Required":"Usuario Requerido",
   "Password Required":"Contraseña Requerida",
   "Username":"Usuario",
-  "Password":"Contraseña"
+  "Password":"Contraseña",
+  "Close":"Cerrar",
+  "My Recipes":"Mis Recetas",
+  "Favorites":"Favoritos",
+  "Random":"Aleatorio",
+  "Jokes":"Chistes",
+  "Back Home":"Volver a inició"
+
 
 }
