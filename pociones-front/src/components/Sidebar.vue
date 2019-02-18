@@ -145,7 +145,6 @@
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Recent', icon: 'star', route: 'Recent' },
-          { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Random', icon: 'local_bar', route: 'Random' }
         ],
         mini: true,
