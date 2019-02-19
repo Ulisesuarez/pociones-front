@@ -2,9 +2,9 @@
   <v-navigation-drawer
    style="float:left; position:fixed; margin-top:200px; max-width:200px;"
       :mini-variant="mini"
-      v-model="drawer"
       height="320"
       mini-variant-width="70"
+      mobile-break-point=0
      
      
 
