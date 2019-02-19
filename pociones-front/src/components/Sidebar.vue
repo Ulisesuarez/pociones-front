@@ -140,7 +140,7 @@
     data () {
       return {
         drawer: true,
-        idoniaLogo: '',
+        idoniaLogo: "https://png.pngtree.com/svg/20160717/ico_home_on_53815.png",
         items: [
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
