@@ -119,13 +119,14 @@ export default Vue.extend({
         };
     },
     beforeMount() {
+
       this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
               'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });
     },
     watch: {
       page(val) {
-          console.log(val);
+          this.results = this.$services.search({ingredients: this.ingredientsSelected, page:val, order:"created_at"})
       },
     },
   methods: {
