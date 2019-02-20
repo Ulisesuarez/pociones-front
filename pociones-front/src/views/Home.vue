@@ -98,7 +98,7 @@
 </v-container>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
 
 
@@ -119,17 +119,19 @@ export default Vue.extend({
         };
     },
     beforeMount() {
-
       this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
               'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });
     },
     watch: {
       page(val) {
-          this.results = this.$services.search({ingredients: this.ingredientsSelected, page:val, order:"created_at"})
+          this.results = this.searchPotion(val);
       },
     },
   methods: {
+      searchPotion(page){
+          this.$services.search({ingredients: this.ingredientsSelected, page:page, order:"created_at"})
+      },
       debugMe() {
           if (!this.ingredientsSelected.includes(this.selectedIngredient)) {
               this.$set(this.ingredientsSelected, this.ingredientsSelected.length , this.selectedIngredient);
