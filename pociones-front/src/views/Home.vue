@@ -106,7 +106,7 @@ export default Vue.extend({
   name: 'home',
   components: {},
     data() {
-        let arr: any[];
+        let arr;
         arr = [];
         return {
             page: 1,
