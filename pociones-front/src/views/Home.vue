@@ -106,7 +106,7 @@ export default Vue.extend({
   name: 'home',
   components: {},
     data() {
-        let arr: any[];
+        let arr;
         arr = [];
         return {
             page: 1,
@@ -144,7 +144,7 @@ export default Vue.extend({
       clear() {
           console.log('clear');
       },
-      deleteIngredient(ingredient: any) {
+      deleteIngredient(ingredient) {
           console.log(ingredient);
           console.log(this.ingredientsSelected.findIndex((item) => item === ingredient));
           this.$delete(this.ingredientsSelected, this.ingredientsSelected.findIndex((item) => item === ingredient));
