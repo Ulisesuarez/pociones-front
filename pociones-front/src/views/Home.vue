@@ -119,6 +119,11 @@ export default Vue.extend({
         };
     },
     beforeMount() {
+      this.$services.generic.get({endpoint:"users"}).then(response=>{
+          console.log(response)
+          }).catch(e=>{
+          console.log(e);
+      })
       this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
               'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });

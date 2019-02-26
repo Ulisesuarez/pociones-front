@@ -5,7 +5,7 @@ import axios from 'axios';
 import Vue from 'vue';
 
 // const baseURL = `${protocol}://${hostname}:${port}/api/`;
-const baseURL = `http://algo:8081/api/`;
+const baseURL = `http://localhost:9022/api/`;
 const instance = axios.create({ baseURL });
 
 instance.interceptors.response.use((data) => data, (error) => {
