@@ -9,7 +9,7 @@ const baseURL = `http://localhost:9022/api/`;
 const instance = axios.create({ baseURL });
 
 instance.interceptors.response.use((data) => data, (error) => {
-    if (error.response.status === 401) {
+    if (error.response && error.response.status === 401) {
         const url = new URL(error.config.url);
         if (url.pathname !== '/api/auth/login') {
             Vue.notify({

@@ -19,7 +19,7 @@ db.sequelize.sync({force: false}).then(() => {
   console.log('Drop and Resync with { force: false }');
 });
  
-require('./app/route/customer.route.js')(app);
+require('./app/route/recipe.route.js')(app);
 require('./app/route/user.route.js')(app);
 // Create a Server
 var server = app.listen(9022, function () {
