@@ -19,9 +19,10 @@ El usuario lo único que hará será el añadir los ingredientes deseados y ver 
 
 # BACK-END
 ## Herramientas a utilizar
-| Lenguaje | Framework | Editor |
-| ------ | ------ | -----: |
-| Java | Spring | IntelliJ IDEA |
+| Lenguaje | Entorno | ORM | Framework |  Editor |
+| ------ | ------ | ------ | ------ |  -----: |
+| JavaScript | Node.js | Sequelize| Express | Webstorm |
+
 # FRONT-END
 ## Herramientas a utilizar
 | Lenguaje | Framework | Editor |
