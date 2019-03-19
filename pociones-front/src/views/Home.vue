@@ -119,11 +119,33 @@ export default Vue.extend({
         };
     },
     beforeMount() {
-      this.$services.generic.get({endpoint:"users"}).then(response=>{
+      this.$services.generic.get({endpoint:'users'}).then(response=>{
           console.log(response)
           }).catch(e=>{
           console.log(e);
-      })
+      });
+      this.$services.generic.get({endpoint:'recipes'}).then(response=>{
+          console.log(response)
+        }).catch(e=>{
+          console.log(e);
+        });
+        this.$services.generic.get({endpoint:'recipe/6'}).then(response=>{
+            console.log(response)
+        }).catch(e=>{
+            console.log(e);
+        });
+      /*this.$services.generic.post("recipe", {
+            name: 'whisky con hielo',
+            steps: ['agitar', 'beber'],
+            image: 'http://hielosmairena.com/wp-content/uploads/2018/10/whisky-con-hielo-1200x600.jpg',
+            tag: 'Alcoholic',
+            ingredients:[1,2]
+        }
+        ).then(response=>{
+            console.log(response)
+        }).catch(e=>{
+            console.log(e);
+        })*/
       this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
               'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });
