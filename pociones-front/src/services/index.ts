@@ -24,11 +24,7 @@ const Services = ({ axios }: any) => ({
             url: endpoint,
             data,
         }),
-        post: (endpoint: string, data: any) => axios({
-            method: 'POST',
-            url: endpoint,
-            data,
-        }),
+        post: (endpoint: string, data: any) => axios.post(endpoint, data),
         search: (endpoint: string, ...params: any[]) => axios.get(endpoint, ...params),
         delete: (endpoint: string) => axios({
             method: 'DELETE',

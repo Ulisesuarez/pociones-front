@@ -103,8 +103,12 @@
       },
       methods: {
           accept() {
-              this.$services.auth.login({userName:this.userName, password:this.password})
+              this.$services.auth.login({userName: this.userName, password: this.password})
+                  .then( (response) => {
 
+                  }).catch( (error) => {
+                  console.error(error);
+              });
               this.$root.$emit('closeLogin');
           },
           cancel() {
