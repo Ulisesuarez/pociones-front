@@ -8,18 +8,9 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.INTEGER,
 			field: 'recipe_id',
 		},
-		createdAt: {
-			type: 'TIMESTAMP',
-			defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-			field: 'created_at',
-		},
-		updatedAt: {
-			type: 'TIMESTAMP',
-			defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-			field: 'updated_at',
-		},
 	}, {
 		freezeTableName: true,
+		timestamps: false,
 	});
 
 	return RecipeIngredient;
