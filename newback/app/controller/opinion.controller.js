@@ -1,16 +1,15 @@
 const db = require('../config/db.config.js');
 const Opinion = db.opinion;
 
-// Post a Recipe
+// Post a Opinion
 exports.create = (req, res) => {
     // Save to PostgreSQL database
     Opinion.create({
-        name: req.body.name,
-        steps: req.body.steps,
-        image: req.body.image,
-        tag: req.body.tag,
+        id_user: req.body.name,
+        id_recipe: req.body.steps,
+        opinion: req.body.image,
     }).then(opinion => {
-        opinion.setIngredients(req.body.ingredients).catch(error=>{
+        opinion.catch(error=>{
             console.log(error);
         });
         // Send created Recipe to client
@@ -21,71 +20,69 @@ exports.create = (req, res) => {
     });
 };
 
-// FETCH all Recipes
+// FETCH all Opinions
 exports.getAll = (req, res) => {
-    Recipe.findAll({include:db.ingredient}).then(recipes => {
+    Opinion.findAll().then(opinions => {
         // Send all Recipes to Client
-        res.send(recipes);
-    }).catch(err => {
-        res.status(500).send("Error -> " + err);
-    })
-};
-
-// Find a Recipe by Id
-exports.findById = (req, res) => {
-    Recipe.findByPk(req.params.recipeId,{include:db.ingredient}).then(recipe => {
-        res.send(recipe);
+        res.send(opinions);
     }).catch(err => {
         res.status(500).send("Error -> " + err);
     });
 };
 
-// Find Recipes by Tag
+// Find a Opinion by Id
+exports.findById = (req, res) => {
+    Opinion.findByPk(req.params.id_opinion).then(opinion => {
+        res.send(opinion);
+    }).catch(err => {
+        res.status(500).send("Error -> " + err);
+    });
+};
+
+// Find Opinions by User
 exports.findByUser = (req, res) => {
-    Recipe.findAll({
+    Opinion.findAll({
         where: {
-            tag: req.params.tag
+            id_user: req.params.id_user
         }
     }).then(
-        recipes => {
-            res.send(recipes);
+        opinions => {
+            res.send(opinions);
         }
     ).catch(err => {
         res.status(500).send("Error -> " + err);
     });
 };
 
-// Update a Recipe
+// Update a Opinion
 exports.update = (req, res) => {
-    var Recipe = req.body;
-    const id = req.params.recipeId;
-    Recipe.update({
-        name: req.body.name,
-        steps: req.body.steps,
-        image: req.body.image,
-        tsg: req.body.tag,
+    var Opinion = req.body;
+    const id = req.params.id_opinion;
+    Opinion.update({
+        id_user: req.body.name,
+        id_recipe: req.body.steps,
+        opinion: req.body.image,
     }, {
         where: {
-            id: id
+            id_opinion: id
         },
         returning: true
-    }).then(recipe => {
-        recipe.setIngredients(req.body.ingredients);
-        res.status(200).send(recipe);
+    }).then(opinion => {
+        res.status(200).send(opinion);
     }).catch(err => {
         res.status(500).send("Error -> " + err);
     });
 };
 
-// Delete a Recipe by Id
+// Delete a Opinion by Id
 exports.delete = (req, res) => {
-    const id = req.params.recipeId;
-    Recipe.destroy({
+    const id = req.params.id_opinion;
+    Opinion.destroy({
         where: {
-            id: id
+            id_opinion: id
         }
     }).then(() => {
-        res.status(200).send('Recipe has been deleted!');
+        res.status(200).send('Opinion has been deleted!');
     }).catch(err => {
         res.status(500).send("Error -> " + err);
     });
