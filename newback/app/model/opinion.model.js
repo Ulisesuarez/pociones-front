@@ -1,17 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
     const Opinion = sequelize.define('opinion', {
-        id: {
+        id_opinion: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        username: {
-            type: Sequelize.STRING
+        id_user: {
+            type: Sequelize.INTEGER
         },
         opinion: {
             type: Sequelize.STRING
         },
-        recipeId: {
+        id_recipe: {
             type: Sequelize.INTEGER
         },
 
