@@ -23,7 +23,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/potion-view',
+      path: '/potion-view/:id',
       name: 'potion-view',
       component: PotionView,
     }

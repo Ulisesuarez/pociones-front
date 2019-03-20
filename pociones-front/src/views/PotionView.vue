@@ -2,7 +2,7 @@
   <v-container class="potion-view">
       <v-layout row wrap class="potion-container">
           <v-flex>
-            <h1>{{drink.title}}</h1>
+            <h1>{{drink.name}}</h1>
           </v-flex>
           <v-flex>
             <v-layout row wrap>
@@ -12,7 +12,7 @@
                 <v-flex class="potion-subview">
                     <h3>Ingredientes</h3>
                     <ul v-for="ingredient in drink.ingredients" :key="ingredient" style="list-style-type: none;">
-                        <li>{{ingredient}}</li>
+                        <li>{{ingredient.name}}</li>
                     </ul>
                     <h3>Proceso</h3>
                     <ul v-for="step in drink.steps" :key="step">
@@ -50,8 +50,27 @@ export default Vue.extend({
   name: 'potion-view',
   data() {
     return {
-        drink: null,
+        drink: {},
+        comments: []
         }
+    },
+    computed:{
+        recipeId(){
+            return this.$route.params.id;
+        }
+    },
+    beforeMount() {
+      this.$services.generic.get({endpoint: `recipe/${this.recipeId}`}).then(response=>{
+          console.log(response.data);
+          this.drink = response.data;
+        }).catch(e=>{
+          console.log(e);
+        });
+      this.$services.generic.get({endpoint: `opinionsByRecipeId/${this.recipeId}`}).then(response=>{
+          console.log(response);
+      }).catch(e=>{
+          console.log(e);
+      })  
     },
     created() {
         this.drink = {title: "Pomada",
@@ -64,8 +83,8 @@ export default Vue.extend({
                     "Y ya está! Ya tenemos el elixir de San Juan en nuestras manos!"
             ],
             image: "http://www.ginxoriguer.es/wp-content/uploads/2017/03/receta-pomada-gin-xoriguer.jpg",
-            comments: [{comment: "Qué rico!!!", valoration: "5", user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibeca"} }]
         };
+        this.coments = [{comment: "Qué rico!!!", valoration: "5", user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibeca"} }]
     },
 });
 </script>
