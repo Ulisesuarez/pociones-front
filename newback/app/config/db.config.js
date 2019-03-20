@@ -22,9 +22,11 @@ db.sequelize = sequelize;
 //Models/tables
 db.users = require('../model/user.model.js')(sequelize, Sequelize);
 db.recipe = require('../model/recipe.model.js')(sequelize, Sequelize);
+db.opinion = require('../model/opinion.model.js')(sequelize, Sequelize);
 db.ingredient = require('../model/ingredient.model.js')(sequelize, Sequelize);
 db.recipIngredient = require('../model/recipe.ingredient.model.js')(sequelize, Sequelize);
 db.ingredient.belongsToMany(db.recipe, { through: db.recipIngredient } );
 db.recipe.belongsToMany(db.ingredient, { through: db.recipIngredient });
+db.recipe.hasMany(db.opinion);
 
 module.exports = db;
