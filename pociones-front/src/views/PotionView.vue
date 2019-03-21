@@ -69,7 +69,7 @@ export default Vue.extend({
         }).catch(e=>{
           console.log(e);
         });
-      this.$services.generic.get({endpoint: `opinionsByRecipeId/${this.recipeId}`}).then(response=>{
+      this.$services.generic.get({endpoint: `opinions/${this.recipeId}`}).then(response=>{
           console.log(response);
       }).catch(e=>{
           console.log(e);

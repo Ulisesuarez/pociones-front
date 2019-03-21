@@ -157,23 +157,9 @@
     },
     methods: {
           accept() {
-<<<<<<< HEAD
-              this.$services.auth.register({userName:this.name, email:this.email, password:this.password})
-=======
-              this.$services.generic.post("user", {
-                        username: 'valen',
-                        password: 'ddddddddd',
-                        email: 'http://hielosmairena.com/wp-content/uploads/2018/10/whisky-con-hielo-1200x600.jpg',
-                        avatar:'hielosmairena.com/wp-content/uploads/2018/10/whisky-con-hielo-1200x600.jpg',
-                           role:  'ADMIN'
-                      }
-              ).then(response=>{
-                console.log(response)
-              }).catch(e=>{
-                console.log(e);
-              });
 
->>>>>>> master
+              this.$services.auth.register({userName:this.name, email:this.email, password:this.password})
+
               this.$root.$emit('closeRegister');
           },
           cancel() {

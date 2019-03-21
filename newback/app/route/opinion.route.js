@@ -14,6 +14,9 @@ module.exports = function(app) {
     // Retrieve a single Recipe by userId
     app.get('/api/opinionByUser/:userId', opinion.findById);
 
+    // Retrieve all Opinions by ReceipId
+    app.get('/api/opinions/:recipeId', opinion.findByRecipe);
+
     // Update a Recipe with Id
     app.put('/api/opinion/:opinionId', opinion.update);
 
