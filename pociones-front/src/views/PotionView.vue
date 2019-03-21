@@ -27,14 +27,17 @@
           <v-flex xs12>
             <h3>Opiniones</h3>
           </v-flex>
-          <v-flex v-for="comment in drink.comments" :key="comment" xs12>
+          <v-flex v-for="comment in comments" :key="comment" xs12 style="margin-top: 20px">
               <v-layout row wrap class="comments">
-                    <v-flex xs3>
+                    <v-flex xs4>
                         <img class="avatar" :src="comment.user.avatar"/>
                         <h4>{{comment.user.userName}}</h4>
                     </v-flex>
-                    <v-flex xs9 class="comment-text">
-                        <div>{{comment.valoration}}</div>
+                    <v-flex xs8 class="comment-text" style="margin-top: 20px">
+                        <span>
+                            <v-icon style="color: gold;" v-for="(value, index) in +comment.valoration" :key="value + index">star</v-icon>
+                            <v-icon style="color: gold;" v-for="(value, index) in (5 - +comment.valoration)" :key="index + value">star_border</v-icon>
+                        </span>
                         <div>{{comment.comment}}</div>
                     </v-flex>
               </v-layout>
@@ -84,7 +87,18 @@ export default Vue.extend({
             ],
             image: "http://www.ginxoriguer.es/wp-content/uploads/2017/03/receta-pomada-gin-xoriguer.jpg",
         };
-        this.coments = [{comment: "Qué rico!!!", valoration: "5", user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibeca"} }]
+        this.comments = [
+            {
+                comment: "Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg asdgsadgdgsadgsdgsdg sadasdgdg", 
+                valoration: "5", 
+                user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibecaasdasdasdasdfg"}
+            },
+            {
+                comment: "Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg asdgsadgdgsadgsdgsdg sadasdgdg", 
+                valoration: "3", 
+                user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibecaasdasdasdasdfg"}
+            }
+                 ]
     },
 });
 </script>
