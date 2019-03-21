@@ -54,9 +54,6 @@
             </v-list-tile>
         </v-list>
         </v-menu>
-
-         <login v-if="showLogin"></login>
-         <register v-if="showRegister"></register>
     </v-toolbar>
 
         <v-toolbar id="mobileToolbar" v-show="$vuetify.breakpoint.xsOnly" app>
@@ -136,21 +133,25 @@
             </v-menu>
           </v-toolbar>
         <login v-if="showLogin"></login>
+        <register v-if="showRegister"></register>
+        <forgotten-password v-if="showForgottenPassword"></forgotten-password>
     </div>
 </template>
 
 <script>
 import Login from '@/components/Login';
 import Register from '@/components/Register';
+import ForgottenPassword from '@/components/ForgottenPassword';
 export default {
     name: 'custom-header',
     components: {Login,
-                 Register},
+                 Register, ForgottenPassword},
     data() {
         return {
             loggedIn: false,
             showLogin: false,
             showRegister: false,
+            showForgottenPassword: false,
             locales: [
                 {name: this.$t('English'), value: 'en'},
                 {name: this.$t('Spanish'), value: 'es'},
@@ -171,10 +172,17 @@ export default {
       this.$root.$on('closeRegister', () => {
           this.showRegister = false;
       });
+      this.$root.$on('openForgottenPassword', () => {
+          this.showForgottenPassword = true;
+      });
+      this.$root.$on('closeForgottenPassword', () => {
+          this.showForgottenPassword = false;
+      });
     },
     beforeDestroy() {
         this.$root.$off('closeLogin');
         this.$root.$off('closeRegister');
+        this.$root.$off('closeForgottenPassword');
         window.removeEventListener('resize', this.refreshViewport);
     },
     methods: {

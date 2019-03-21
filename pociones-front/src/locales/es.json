@@ -10,6 +10,8 @@
   "Password":"Contraseña",
   "Repeat Email": "Repetir Email",
   "Repeat password": "Repetir contraseña",
+  "PasswordRecovery": "Recuperar contraseña",
+  "ForgottenPassword": "He olvidado mi contraseña",
   "Validators": {
     "requiredName": "El nombre es requerido",
     "nameLength": "El nombre debe tener al menos 5 caracteres",

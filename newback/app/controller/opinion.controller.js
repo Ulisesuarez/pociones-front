@@ -59,7 +59,7 @@ exports.findByUser = (req, res) => {
 exports.findByRecipe = (req, res) => {
     Opinion.findAll({
         where: {
-            id_recipe: req.params.id_recipe
+            id_recipe: req.params.recipeId
         }
     }).then(
         opinions => {
