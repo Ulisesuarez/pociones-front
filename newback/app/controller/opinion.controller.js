@@ -54,6 +54,22 @@ exports.findByUser = (req, res) => {
     });
 };
 
+// findByRecipe
+
+exports.findByRecipe = (req, res) => {
+    Opinion.findAll({
+        where: {
+            id_recipe: req.params.id_recipe
+        }
+    }).then(
+        opinions => {
+            res.send(opinions);
+        }
+    ).catch(err => {
+        res.status(500).send("Error -> " + err);
+    });
+};
+
 // Update a Opinion
 exports.update = (req, res) => {
     var Opinion = req.body;
