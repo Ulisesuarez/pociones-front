@@ -5,9 +5,9 @@ const Opinion = db.opinion;
 exports.create = (req, res) => {
     // Save to PostgreSQL database
     Opinion.create({
-        id_user: req.body.name,
-        id_recipe: req.body.steps,
-        opinion: req.body.image,
+        id_user: req.body.id_user,
+        id_recipe: req.body.id_recipe,
+        opinion: req.body.opinion,
     }).then(opinion => {
         opinion.catch(error=>{
             console.log(error);
@@ -59,7 +59,7 @@ exports.findByUser = (req, res) => {
 exports.findByRecipe = (req, res) => {
     Opinion.findAll({
         where: {
-            id_recipe: req.params.recipeId
+            id_recipe: req.params.id_recipe
         }
     }).then(
         opinions => {
