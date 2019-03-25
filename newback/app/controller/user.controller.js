@@ -38,7 +38,18 @@ exports.findAll = (req, res) => {
 		res.status(500).send("Error -> " + err);
 	});
 };
- 
+
+/*  ///////////////////////////////////
+
+// FETCH some Customers
+exports.findLimit = (req)
+User.findAll()({
+	limit: 10
+  });
+
+ /////////////////////////////////// */
+
+
 // Find a Customer by Id
 exports.findById = (req, res) => {	
 	User.findById(req.params.userId).then(user => {
