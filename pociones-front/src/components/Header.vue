@@ -32,22 +32,24 @@
         </v-btn>
         <v-menu offset-y
                 attach="#desktopToolbar"
-                nudge-left="100">
-        <v-avatar v-if="loggedIn"
+                nudge-left="100"
+                v-if="loggedIn"
+>
+        <v-avatar
                 slot="activator"
                 size="36px"
                 color="blue"
         >
             <img
-                    v-if="user.avatar"
-                    src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                    v-if="user.avatar && user.avatar != null"
+                    :src="user.avatar"
                     alt="Avatar"
             >
-            <span style="color: #fffafa; font-weight: bold;font-size: 2em;" v-else>{{user.userName.charAt(0)}}</span>
+            <span style="color: #fffafa; font-weight: bold;font-size: 2em;" v-else>{{user.username ? user.username.charAt(0).toUpperCase(): '?'}}</span>
         </v-avatar>
             <v-list>
             <v-list-tile>
-                <v-list-tile-title>{{ user.userName }}</v-list-tile-title>
+                <v-list-tile-title>{{ user.username || '?' }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile>
                 <v-list-tile-content> <v-btn @click="logout()">{{$t('logout')}}</v-btn></v-list-tile-content>
@@ -116,15 +118,15 @@
                           color="blue"
                 >
                     <img
-                            v-if="user.avatar"
-                            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                            v-if="user.avatar && user.avatar != null"
+                            :src="user.avatar"
                             alt="Avatar"
                     >
-                    <span style="color: #fffafa; font-weight: bold;font-size: 2em;" v-else>{{user.userName.charAt(0)}}</span>
+                    <span style="color: #fffafa; font-weight: bold;font-size: 2em;" v-else>{{user.username? user.username.charAt(0).toUpperCase() : '?'}}</span>
                 </v-avatar>
                 <v-list>
                     <v-list-tile>
-                        <v-list-tile-title>{{ user.userName }}</v-list-tile-title>
+                        <v-list-tile-title>{{ user.username || '?' }}</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile>
                         <v-list-tile-content> <v-btn @click="logout()">{{$t('logout')}}</v-btn></v-list-tile-content>
@@ -148,15 +150,15 @@ export default {
                  Register, ForgottenPassword},
     data() {
         return {
-            loggedIn: false,
             showLogin: false,
             showRegister: false,
+            user:{},
+            loggedIn: false,
             showForgottenPassword: false,
             locales: [
                 {name: this.$t('English'), value: 'en'},
                 {name: this.$t('Spanish'), value: 'es'},
             ],
-            user: { userName: 'Ulises'},
             viewport: window.innerWidth && document.documentElement.clientWidth ?
                 Math.min(window.innerWidth, document.documentElement.clientWidth) :
                 window.innerWidth ||
@@ -164,7 +166,35 @@ export default {
                 document.getElementsByTagName('body')[0].clientWidth,
         };
     },
+    computed:{
+        logged(){
+            return  this.$store.state.session.token && this.$store.state.session.token  !== '' && this.$store.state.session.token !== null && typeof this.$store.state.session.token === 'string' && this.$store.state.session.token.length > 1
+        },
+        accountUser(){
+            return this.$store.state.session.account
+        }
+
+    },
+    watch:{
+        logged(val){
+            this.loggedIn = val
+            console.log("LOGGED IN:", this.loggedIn)
+        },
+        accountUser:{
+            deep: true,
+            handler(val){
+                console.log(this)
+                console.log(" not setting ACCOUNT:", val)
+                const keys = Object.keys(val)
+                for (const key of keys) {
+                    this.$set(this.user,key,val[key])
+                }
+                console.log("ACCOUNT:", this.user)
+            }
+        }
+    },
     mounted() {
+       this.loggedIn = this.logged
       window.addEventListener('resize', this.refreshViewport);
       this.$root.$on('closeLogin', () => {
           this.showLogin = false;

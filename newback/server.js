@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var expressLogging = require('express-logging');
 var logger = require('logops');
+
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(expressLogging(logger));
 const cors = require('cors');
@@ -21,6 +23,9 @@ db.sequelize.sync({force: false}).then(() => {
  
 require('./app/route/recipe.route.js')(app);
 require('./app/route/user.route.js')(app);
+
+
+
 // Create a Server
 var server = app.listen(9022, function () {
  

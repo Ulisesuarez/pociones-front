@@ -134,6 +134,14 @@ export default Vue.extend({
         }).catch(e=>{
             console.log(e);
         });
+        this.$services.generic.post("user", {
+            username: "Test",
+            password: "estoVieneHasheado",
+            email: "test3@msn.com",
+            role: "user"
+
+
+        })
       /*this.$services.generic.post("recipe", {
             name: 'whisky con hielo',
             steps: ['agitar', 'beber'],
