@@ -1,6 +1,6 @@
 const Services = ({ axios }: any) => ({
     auth: {
-        login: (payload: object) => axios.post('auth/login', payload),
+        login: (payload: object) => axios.post('login', payload),
         logout: () => axios.post('auth/logout'),
         register: (payload: object) => axios.post('auth/register', payload),
     },

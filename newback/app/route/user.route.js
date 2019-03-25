@@ -19,4 +19,10 @@ module.exports = function(app) {
  
     // Delete a Customer with Id
     app.delete('/api/user/:userId', user.delete);
-}
+
+    // Login
+    app.post('/api/login', user.login);
+
+    // account by token
+   app.get('/api/details', user.accountByToken);
+};

@@ -14,10 +14,10 @@
            d-flex
         >
           <v-text-field
-            v-model="Usuario"
+            v-model="email"
             :rules="nameRulesU"
             :counter="20"
-            v-bind:label="$t('Username')"
+            v-bind:label="$t('Email')"
             required
           ></v-text-field>
         </v-flex>
@@ -70,12 +70,12 @@
     data() {
       return {
         valid: false,
-        Usuario: '',
+        email: '',
         loginShow: true,
         password: '',
         passErrors: [],
         nameRulesU: [ () => {
-            return !!this.Usuario || this.$t('Username Required');
+            return !!this.email || this.$t('Username Required');
         }],
          nameRulesP: [ () => {
             return !!this.password || this.$t('Password Required');
@@ -100,12 +100,7 @@
       },
       methods: {
           accept() {
-              this.$services.auth.login({userName: this.userName, password: this.password})
-                  .then( (response) => {
-
-                  }).catch( (error) => {
-                  console.error(error);
-              });
+              this.$store.dispatch('session/login', {email: this.email, password: this.password})
               this.$root.$emit('closeLogin');
           },
           cancel() {
