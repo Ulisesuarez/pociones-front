@@ -1,3 +1,4 @@
+
 ### Trabajo realizado por
 
 - Sergio Jiménez Sastre
@@ -19,14 +20,16 @@ El usuario lo único que hará será el añadir los ingredientes deseados y ver 
 
 # BACK-END
 ## Herramientas a utilizar
-| Lenguaje | Framework | Editor |
-| ------ | ------ | -----: |
-| Java | Spring | IntelliJ IDEA |
+| Lenguaje | Entorno | ORM | Framework |  Editor |
+| ------ | ------ | ------ | ------ |  -----: |
+| JavaScript | Node.js | Sequelize| Express | Webstorm |
+
 # FRONT-END
 ## Herramientas a utilizar
-| Lenguaje | Framework | Editor |
+| Lenguaje | Framework | Editores |
 | ------ | ------ | -----: |
-| VUE | Vuetify | WebStorm |
-|  |  | Visual Studio Code |
+| VUE | Vuetify | WebStorm y Visual Studio Code |
+## Sistema gestor de base de datos
+En este proyecto el sistema gestión de base de datos es PostgreSQL.
 ## Control de versiones
 El control de versiones a utilizar es Git.
