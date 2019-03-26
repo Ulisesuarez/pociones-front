@@ -5,12 +5,10 @@
       v-model="drawer"
       height="320"
       mini-variant-width="70"
-     
-     
-
   >
    <v-list class="pt-0" dense style="max-width: 200px!important;">
       <v-divider></v-divider>
+
      <v-subheader>{{$t('Your Alchemy')}}</v-subheader>
       <v-list-tile
           v-for="item in items"

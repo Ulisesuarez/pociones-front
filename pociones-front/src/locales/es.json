@@ -8,6 +8,12 @@
   "Password Required":"Contraseña Requerida",
   "Username":"Usuario",
   "Password":"Contraseña",
+  "My Recipes":"Mis Recetas",
+  "Favorites":"Favoritos",
+  "Random":"Aleatorio",
+  "Recent":"Recientes",
+  "Back Home":"Volver a inició",
+  "Your Alchemy":"Tu Alquimia",
   "Repeat Email": "Repetir Email",
   "Repeat password": "Repetir contraseña",
   "PasswordRecovery": "Recuperar contraseña",
@@ -20,5 +26,5 @@
     "emailMatch": "Los E-mails introducidos no coinciden",
     "requiredPassword": "La contraseña es requerida",
     "passwordMatch": "Las contraseñas introducidas no coinciden"
-}
+  }
 }

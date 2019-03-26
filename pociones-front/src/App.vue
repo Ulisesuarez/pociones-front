@@ -2,6 +2,7 @@
   <v-app>
     <custom-header></custom-header>
     <v-content>
+      <sidebar></sidebar>
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -9,11 +10,13 @@
 
 <script>
 import CustomHeader from './components/Header';
+import Sidebar from './components/Sidebar';
 
 export default {
   name: 'App',
   components: {
     CustomHeader,
+    Sidebar,
   },
   data() {
     return {
