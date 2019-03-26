@@ -2,16 +2,14 @@
   <v-navigation-drawer
    style="float:left; position:fixed; margin-top:200px; max-width:200px;"
       :mini-variant="mini"
+      v-model="drawer"
       height="320"
       mini-variant-width="70"
-      mobile-break-point=0
-     
-     
-
   >
    <v-list class="pt-0" dense style="max-width: 200px!important;">
       <v-divider></v-divider>
-     <v-subheader style="margin-left:23%">{{$t('Your Alchemy')}}</v-subheader>
+
+     <v-subheader>{{$t('Your Alchemy')}}</v-subheader>
       <v-list-tile
           v-for="item in items"
           :key="item.title"
@@ -140,11 +138,12 @@
     data () {
       return {
         drawer: true,
-        idoniaLogo: "https://png.pngtree.com/svg/20160717/ico_home_on_53815.png",
+        idoniaLogo: '',
         items: [
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
-          { title: 'Recent', icon: 'library_books', route: 'Recent' },
+          { title: 'Recent', icon: 'star', route: 'Recent' },
+          { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Random', icon: 'local_bar', route: 'Random' }
         ],
         mini: true,

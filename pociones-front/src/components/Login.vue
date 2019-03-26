@@ -14,10 +14,10 @@
            d-flex
         >
           <v-text-field
-            v-model="Usuario"
+            v-model="email"
             :rules="nameRulesU"
             :counter="20"
-            v-bind:label="$t('Username')"
+            v-bind:label="$t('Email')"
             required
           ></v-text-field>
         </v-flex>
@@ -43,13 +43,16 @@
         <v-divider></v-divider>
 
         <v-card-actions>
+                  <a @click="forgottenPassword"
+          style="float: right; position: relative"
+        >{{$t('ForgottenPassword')}}</a>
           <v-spacer></v-spacer>
           <v-btn
                   color="gray"
                   flat
                   @click="cancel"
           >
-            Close
+            {{$t('Close')}}
           </v-btn>
           <v-btn
             color="primary"
@@ -70,12 +73,12 @@
     data() {
       return {
         valid: false,
-        Usuario: '',
+        email: '',
         loginShow: true,
         password: '',
         passErrors: [],
         nameRulesU: [ () => {
-            return !!this.Usuario || this.$t('Username Required');
+            return !!this.email || this.$t('Username Required');
         }],
          nameRulesP: [ () => {
             return !!this.password || this.$t('Password Required');
@@ -100,13 +103,16 @@
       },
       methods: {
           accept() {
-              this.$services.auth.login({userName:this.userName, password:this.password})
-
+              this.$store.dispatch('session/login', {email: this.email, password: this.password})
               this.$root.$emit('closeLogin');
           },
           cancel() {
               this.$root.$emit('closeLogin');
           },
+          forgottenPassword() {
+            this.$root.$emit('openForgottenPassword');
+            this.$root.$emit('closeLogin');
+          }
       },
   };
 </script>

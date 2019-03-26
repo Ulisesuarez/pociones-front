@@ -1,8 +1,9 @@
 const Services = ({ axios }: any) => ({
     auth: {
-        login: (payload: object) => axios.post('auth/login', payload),
+        login: (payload: object) => axios.post('login', payload),
         logout: () => axios.post('auth/logout'),
         register: (payload: object) => axios.post('auth/register', payload),
+        forgottenPassword: (payload: object) => axios.post('auth/forgotten-password', payload),
     },
     potions: {
         get: (id: any) => axios.get(`potion/${id}`),
@@ -23,11 +24,7 @@ const Services = ({ axios }: any) => ({
             url: endpoint,
             data,
         }),
-        post: (endpoint: string, data: any) => axios({
-            method: 'POST',
-            url: endpoint,
-            data,
-        }),
+        post: (endpoint: string, data: any) => axios.post(endpoint, data),
         search: (endpoint: string, ...params: any[]) => axios.get(endpoint, ...params),
         delete: (endpoint: string) => axios({
             method: 'DELETE',

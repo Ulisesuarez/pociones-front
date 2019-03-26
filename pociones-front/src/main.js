@@ -7,16 +7,17 @@ import i18n from './i18n';
 import VueCookie from 'vue-cookie';
 import instance from './plugins/axios';
 import Services from './services';
-
+import Notifications from 'vue-notification'
 
 // Tell Vue to use the plugin
 Vue.use(VueCookie);
+Vue.use(Notifications);
 Vue.config.productionTip = false;
 console.log(instance);
 const services = Services({ axios:instance });
 console.log(services);
 Vue.prototype.$services = services;
-
+Vue.prototype.$axios= instance;
 new Vue({
   router,
   store,

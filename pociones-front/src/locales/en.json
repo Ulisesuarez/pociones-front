@@ -2,16 +2,29 @@
   "English":"English",
   "logout": "Logout",
   "Register":"Register",
+  "Close":"Close",
   "Spanish":"Español",
   "Username Required":"Username Required",
   "Password Required":"Password Required",
   "Username":"Username",
   "Password":"Password",
-  "Close":"Close",
   "My Recipes":"My Recipes",
   "Favorites":"Favorites",
   "Random":"Random",
   "Recent":"Recent",
   "Back Home":"Back Home",
-  "Your Alchemy":"Your Alchemy"
+  "Your Alchemy":"Your Alchemy",
+  "Repeat Email": "Repeat Email",
+  "Repeat password": "Repeat password",
+  "PasswordRecovery": "Recover my password",
+  "ForgottenPassword": "I have forgotten my password",
+  "Validators": {
+      "requiredName": "The name is required",
+      "nameLength": "Name must be less than 5 characters",
+      "requiredEmail": "E-mail is required",
+      "validEmail": "E-mail must be valid",
+      "emailMatch": "The emails you entered don\\'t match",
+      "requiredPassword": "Password is required",
+      "passwordMatch": "The passwords you entered don\\'t match"
+  }
 }

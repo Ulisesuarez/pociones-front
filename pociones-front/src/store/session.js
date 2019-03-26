@@ -13,11 +13,15 @@ export default {
     mutations: {
         locale(state, value) {
             state.locale = value;
-            Vue.cookie.locale.set(value.code);
+            Vue.cookie.set('locale', value,  { expires: '3Y' });
         },
         token(state, value) {
             state.token = value;
-            Vue.cookie.token.set(value);
+            Vue.cookie.set('token',value,{ expires: '3H' });
+        },
+        loadCookie(state) {
+            state.token = Vue.cookie.get('token')
+            console.log(state.token)
         },
         loggedIn(state, value) {
             state.loggedIn = value;
@@ -29,43 +33,47 @@ export default {
     actions: {
         setLocale({ commit }, value) {
             let locale = value;
-            if (locale !== 'en' || locale !== 'es') {
-                locale = 'en';
+            if (locale.code !== 'en' || locale.code !== 'es') {
+                locale.code = 'en';
             }
-            commit('locale', locale);
+            commit('locale', locale.code);
             i18n.locale = locale.code;
             Vue.prototype.$vuetify.lang.current = locale.code;
         },
         setToken({ commit }, value) {
             commit('token', value);
-            Vue.axios.defaults.headers.common.Authorization = `Bearer ${value}`;
+            Vue.prototype.$axios.defaults.headers.common.Authorization = `Bearer ${value}`;
         },
-        async login({ dispatch, commit }, crendentials = {username: '', password:  ''}) {
-            const { username, password } = crendentials;
-            if (username && password) {
-                dispatch('setToken', null);
-            }
-            try {
-                const { data } = await Vue.services.auth.login({ username, password });
-                dispatch('setToken', data.token);
-                commit('account', data);
+        loadCookie({ commit }){
+            commit('loadCookie')
+        },
+        setAccount({ commit }, value) {
+            commit('account', value);
+        },
+        login({ dispatch, commit }, crendentials) {
+            dispatch('setToken', null);
+            Vue.prototype.$services.auth.login(crendentials).then(response=>{
+                console.log(response)
+                dispatch('setToken', response.data.token);
+                commit('account', response.data.account);
                 commit('loggedIn', true);
 
                 Vue.notify({
-                    title: i18n.t('notify.logged_in.title'),
+                    title: i18n.t('Welcome'),
                     type: 'primary',
                 });
-            } catch (e) {
+
+            }).catch (e=> {
                 commit('loggedIn', false);
-                throw e;
-            }
+                console.log(e);
+            })
         },
-        async logout({commit}) {
+        logout({commit}) {
             commit('token', null);
             commit('account', {});
             commit('loggedIn', false);
 
-            await Vue.services.auth.logout();
+            Vue.prototype.$services.auth.logout();
             router.push({ name: 'home' });
         },
     },
