@@ -24,13 +24,17 @@ export default {
     };
   },
     beforeMount() {
-        this.$store.dispatch('session/loadCookie')
+        this.$store.dispatch('session/loadCookie').catch(error=>{
+            console.warn(error);
+        });
         this.$i18n.locale = this.$cookie.get('locale') || 'en';
         this.$services.generic.get({endpoint:'details'}).then(response=>{
             console.log(response)
-            this.$store.dispatch('session/setAccount', response.data)
+            this.$store.dispatch('session/setAccount', response.data).catch(error=>{
+                console.warn(error);
+            })
         }).catch(error=>{
-            console.error(error)
+            console.warn(error);
         })
     },
 };

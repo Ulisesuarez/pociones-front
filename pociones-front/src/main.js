@@ -13,9 +13,7 @@ import Notifications from 'vue-notification'
 Vue.use(VueCookie);
 Vue.use(Notifications);
 Vue.config.productionTip = false;
-console.log(instance);
 const services = Services({ axios:instance });
-console.log(services);
 Vue.prototype.$services = services;
 Vue.prototype.$axios= instance;
 new Vue({

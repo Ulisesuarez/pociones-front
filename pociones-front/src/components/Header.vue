@@ -183,8 +183,6 @@ export default {
         accountUser:{
             deep: true,
             handler(val){
-                console.log(this)
-                console.log(" not setting ACCOUNT:", val)
                 const keys = Object.keys(val)
                 for (const key of keys) {
                     this.$set(this.user,key,val[key])

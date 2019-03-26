@@ -21,7 +21,6 @@ export default {
         },
         loadCookie(state) {
             state.token = Vue.cookie.get('token')
-            console.log(state.token)
         },
         loggedIn(state, value) {
             state.loggedIn = value;
@@ -74,7 +73,7 @@ export default {
             commit('loggedIn', false);
 
             Vue.prototype.$services.auth.logout();
-            router.push({ name: 'home' });
+            //router.push({ name: 'home' });
         },
     },
 };
