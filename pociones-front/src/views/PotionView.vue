@@ -42,11 +42,34 @@
                     </v-flex>
               </v-layout>
           </v-flex>
+          <v-flex xs12 style="margin-top: 20px">
+              <v-layout row wrap class="comments">
+                    <v-flex xs3>
+                        <img class="avatar" :src="user.avatar"/>
+                        <h4>{{user.userName}}</h4>
+                    </v-flex>
+                    <v-flex xs9 class="comment-text" style="margin-top: 20px">
+                        <v-layout row wrap>
+                            <v-flex xs8>
+                                <v-form>
+                                    <textarea type="text" style="height: 200%; width: 80%"
+                                     v-model="opinion"></textarea>
+                                </v-form>
+                            </v-flex>
+                            <v-flex xs4>
+                                <v-btn style="background-color: orange; padding: 5px;"
+                                @click="createComment()"
+                                >Enviar comentario</v-btn>
+                            </v-flex>  
+                        </v-layout>                
+                    </v-flex>
+              </v-layout>
+          </v-flex>
       </v-layout>
   </v-container>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -54,7 +77,9 @@ export default Vue.extend({
   data() {
     return {
         drink: {},
-        comments: []
+        comments: [],
+        user: {},
+        opinion: ''
         }
     },
     computed:{
@@ -75,6 +100,16 @@ export default Vue.extend({
           console.log(e);
       })  
     },
+    methods: {
+        createComment() {
+            console.log(this.opinion);
+            this.$services.generic.post('opinion',{opinion: this.opinion, id_recipe: 9, id_user: 1}).then(response=>{
+                console.log(response);
+            }).catch(e=>{
+                console.log(e);
+            })
+        },
+    },   
     created() {
         this.drink = {title: "Pomada",
             ingredients: ["Gin Tonic Xoriguer",
