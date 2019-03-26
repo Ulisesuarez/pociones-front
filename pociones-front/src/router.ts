@@ -26,6 +26,6 @@ export default new Router({
       path: '/potion-view/:id',
       name: 'potion-view',
       component: PotionView,
-    }
+    },
   ],
 });

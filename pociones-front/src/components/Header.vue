@@ -251,8 +251,5 @@ export default {
 </script>
 
 <style scoped>
-    #mobileToolbar .v-btn{
-
-    }
 
 </style>
