@@ -21,6 +21,7 @@ export default {
         },
         loadCookie(state) {
             state.token = Vue.cookie.get('token')
+            state.locale = Vue.cookie.get('locale')
         },
         loggedIn(state, value) {
             state.loggedIn = value;
@@ -32,12 +33,12 @@ export default {
     actions: {
         setLocale({ commit }, value) {
             let locale = value;
-            if (locale.code !== 'en' || locale.code !== 'es') {
-                locale.code = 'en';
+            if (locale !== 'en' && locale !== 'es') {
+                locale = 'en';
             }
-            commit('locale', locale.code);
-            i18n.locale = locale.code;
-            Vue.prototype.$vuetify.lang.current = locale.code;
+            commit('locale', locale);
+            i18n.locale = locale;
+            Vue.prototype.$vuetify.lang.current = locale;
         },
         setToken({ commit }, value) {
             commit('token', value);
