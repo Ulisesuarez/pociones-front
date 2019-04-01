@@ -233,6 +233,7 @@ export default {
       changeLocale(locale) {
           this.$i18n.locale = locale;
           this.$cookie.set('locale', locale, 365);
+          this.$store.dispatch('session/setLocale', locale)
       },
         logout() {
             console.log('ToDo');
