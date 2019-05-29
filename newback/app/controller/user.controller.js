@@ -9,15 +9,23 @@ exports.create = (req, res) => {
 	let hashedPass;
 	bcrypt.hash(req.body.password, saltRounds)    // Store hash in your password DB.
 	.then(function(hash){
+		if (req.body.username === null || req.body.username.length === 0) {
+			throw error
+		};
 		User.create({  
 		username: req.body.username,
 		password: hash,
 		email: req.body.email,
 		role: req.body.role,
 		avatar: "https://api.adorable.io/avatars/204/abott@adorable.png"
-	}).then(user => {		
+	}).then(user => {	
+		let infoUser = {};
+		infoUser.username = user.username;
+		infoUser.email = user.email;
+		infoUser.role = user.role;
+		infoUser.avatar = user.avatar	
 		// Send created customer to client FALTA AÑADIR AVATAR
-		res.send(user);
+		res.send(infoUser);
 	}).catch(err => {
 		res.status(500).send("Error -> " + err);
 	});

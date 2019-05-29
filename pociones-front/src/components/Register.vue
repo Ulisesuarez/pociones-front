@@ -158,7 +158,7 @@
     methods: {
           accept() {
 
-              this.$services.auth.register({userName:this.name, email:this.email, password:this.password})
+              this.$services.auth.register({username:this.name, email:this.email, password:this.password})
 
               this.$root.$emit('closeRegister');
           },

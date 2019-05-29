@@ -2,7 +2,7 @@ const Services = ({ axios }: any) => ({
     auth: {
         login: (payload: object) => axios.post('login', payload),
         logout: () => axios.post('auth/logout'),
-        register: (payload: object) => axios.post('auth/register', payload),
+        register: (payload: object) => axios.post('user', payload),
         forgottenPassword: (payload: object) => axios.post('auth/forgotten-password', payload),
     },
     potions: {
