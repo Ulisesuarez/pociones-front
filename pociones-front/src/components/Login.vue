@@ -77,9 +77,10 @@
         loginShow: true,
         password: '',
         passErrors: [],
-        nameRulesU: [ () => {
-            return !!this.email || this.$t('Username Required');
-        }],
+        nameRulesU: [
+            (v) => !!v || this.$t('Username Required'),
+            (v) => /.+@.+/.test(v) || this.$t('Validators.validEmail'),
+        ],
          nameRulesP: [ () => {
             return !!this.password || this.$t('Password Required');
         }],
