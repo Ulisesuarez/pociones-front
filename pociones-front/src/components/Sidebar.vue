@@ -47,7 +47,7 @@
                   :src="idoniaLogo"
              >
            </v-avatar>
-           <span>{{this.$t('Back to Idonia') }}</span>
+           <span>{{this.$t('Back Home') }}</span>
          </v-tooltip>
          <v-avatar v-else style="width:22px!important; height: 22px!important">
            <img style="width: 22px!important;height:22px!important;"
@@ -141,7 +141,7 @@
         idoniaLogo: '',
         items: [
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
-          { title: 'Recent', icon: 'star', route: 'Recent' },
+          { title: 'Potions', icon: 'star', route:'' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Random', icon: 'local_bar', route: 'Random' },
         ],
@@ -155,9 +155,9 @@
         this.$router.push({ name: route });
       },
       backTo() {
-        // window.location.href=window.location.hostname + '/myspace"
+
         console.log(window)
-        window.location.href = 'http://0.0.0.0:8080/myspace';
+        window.location.href = '/';
       },
     },
   };
