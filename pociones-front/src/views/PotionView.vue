@@ -17,9 +17,9 @@
                     <h3>Proceso</h3>
                     <ul v-for="step in drink.steps" :key="step">
                         <li>{{step}}</li>
-                    </ul> 
-                </v-flex> 
-            </v-layout>  
+                    </ul>
+                </v-flex>
+            </v-layout>
         </v-flex>
       </v-layout>
       <br/>
@@ -60,8 +60,8 @@
                                 <v-btn style="background-color: orange; padding: 5px;"
                                 @click="createComment()"
                                 >Enviar comentario</v-btn>
-                            </v-flex>  
-                        </v-layout>                
+                            </v-flex>
+                        </v-layout>
                     </v-flex>
               </v-layout>
           </v-flex>
@@ -91,49 +91,55 @@ export default Vue.extend({
       this.$services.generic.get({endpoint: `recipe/${this.recipeId}`}).then(response=>{
           console.log(response.data);
           this.drink = response.data;
-        }).catch(e=>{
+        }).catch((e) => {
           console.log(e);
         });
       this.$services.generic.get({endpoint: `opinions/${this.recipeId}`}).then(response=>{
           console.log(response);
-      }).catch(e=>{
+      }).catch((e) => {
           console.log(e);
-      })  
+      })
     },
     methods: {
         createComment() {
             console.log(this.opinion);
-            this.$services.generic.post('opinion',{opinion: this.opinion, id_recipe: 9, id_user: 1}).then(response=>{
+            this.$services.generic.post('opinion', {opinion: this.opinion, id_recipe: 9, id_user: 1})
+                .then(response => {
                 console.log(response);
-            }).catch(e=>{
+            }).catch((e) => {
                 console.log(e);
-            })
+            });
         },
-    },   
+    },
     created() {
-        this.drink = {title: "Pomada",
-            ingredients: ["Gin Tonic Xoriguer",
-                    "Limonada",
-                    "Hielo Picado",
-                    "Mucho Amor"],
-            steps: ["Preparar la limonada con limones exprimidos con la furia de 100 mandriles farloperos, agua del Manantial de las lágrimas de las Ninfas y azúcar extraído de la Remolacha Remolona.",
-                    "A ser posible en un vaso limpio, añadir el hielo, 1/3 de Xoriguer y 2/3 de limonada.",
-                    "Y ya está! Ya tenemos el elixir de San Juan en nuestras manos!"
+        this.drink = {title: 'Pomada',
+            ingredients: ['Gin Tonic Xoriguer',
+                    'Limonada',
+                    'Hielo Picado',
+                    'Mucho Amor'],
+            steps: ['Preparar la limonada con limones exprimidos con la furia de 100 mandriles farloperos,' +
+            ' agua del Manantial de las lágrimas de las Ninfas y azúcar extraído de la Remolacha Remolona.',
+                    'A ser posible en un vaso limpio, añadir el hielo, 1/3 de Xoriguer y 2/3 de limonada.',
+                    'Y ya está! Ya tenemos el elixir de San Juan en nuestras manos!',
             ],
-            image: "http://www.ginxoriguer.es/wp-content/uploads/2017/03/receta-pomada-gin-xoriguer.jpg",
+            image: 'http://www.ginxoriguer.es/wp-content/uploads/2017/03/receta-pomada-gin-xoriguer.jpg',
         };
         this.comments = [
             {
-                comment: "Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg asdgsadgdgsadgsdgsdg sadasdgdg", 
-                valoration: "5", 
-                user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibecaasdasdasdasdfg"}
+                comment: 'Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda' +
+                    ' gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg' +
+                    ' asdgsadgdgsadgsdgsdg sadasdgdg',
+                valoration: '5',
+                user: {avatar: 'https://www.w3schools.com/howto/img_avatar.png', userName: 'Xibecaasdasdasdasdfg'},
             },
             {
-                comment: "Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg asdgsadgdgsadgsdgsdg sadasdgdg", 
-                valoration: "3", 
-                user: {avatar: "https://www.w3schools.com/howto/img_avatar.png", userName: "Xibecaasdasdasdasdfg"}
-            }
-                 ]
+                comment: 'Qué rico!!!sagasgsadgjgljsdg sdgksadgidddd asdgdsagadsg dsgdsagsda' +
+                    ' gsadgggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg' +
+                    ' asdgsadgdgsadgsdgsdg sadasdgdg',
+                valoration: '3',
+                user: {avatar: 'https://www.w3schools.com/howto/img_avatar.png', userName: 'Xibecaasdasdasdasdfg'},
+            },
+                 ];
     },
 });
 </script>
