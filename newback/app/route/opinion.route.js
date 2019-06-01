@@ -1,12 +1,12 @@
 module.exports = function(app) {
 
-    const recipe = require('../controller/opinion.controller.js');
+    const opinion = require('../controller/opinion.controller.js');
 
-    // Create a new Recipe
-    app.post('/api/opinion', opinion.create);
+    // Create a new Opinion
+    app.post('/api/opinion/new', opinion.create);
 
-    // Retrieve all Recipe
-    app.get('/api/opinions', opinion.findAll);
+    // Retrieve all Opinion
+    app.get('/api/opinions', opinion.getAll);
 
     // Retrieve a single Recipe by Id
     app.get('/api/opinion/:opinionId', opinion.findById);
