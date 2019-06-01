@@ -104,6 +104,9 @@
       },
       methods: {
           accept() {
+            if (!this.email || !this.password || !this.email.includes('@') || !this.email.includes('.')) {
+              return;
+            }
               this.$store.dispatch('session/login', {email: this.email, password: this.password});
               this.$root.$emit('closeLogin');
           },
