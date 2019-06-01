@@ -23,6 +23,8 @@ db.sequelize.sync({force: false}).then(() => {
  
 require('./app/route/recipe.route.js')(app);
 require('./app/route/user.route.js')(app);
+require('./app/route/opinion.route.js')(app);
+require('./app/route/ingredient.route.js')(app);
 
 
 

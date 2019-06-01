@@ -107,7 +107,7 @@ export default Vue.extend({
         createComment() {
             console.log(this.opinion);
             console.log(this.userId);
-            this.$services.generic.post('opinion', {opinion: this.opinion, id_recipe: +this.recipeId, id_user: this.userId})
+            this.$services.generic.post('opinion/new', {opinion: this.opinion, id_recipe: this.recipeId, id_user: this.userId})
                 .then((response) => {
                 console.log(response);
             }).catch((e) => {
