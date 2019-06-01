@@ -112,11 +112,18 @@ export default Vue.extend({
             page: 1,
             selectedIngredient: '',
             valid: true,
-            ingredients: ['limonada', 'refresco cola', 'ron'],
+            ingredients: null,
             ingredientsSelected: arr,
             results: arr.slice(),
             categories: ['Any', 'Alcoholic', 'Alcohol Free', 'Poison', 'Love', 'Fun', 'Sleep'],
         };
+    },
+    beforeCreate() {
+        this.$services.generic.get({endpoint:'ingredients'}).then(response=>{
+            console.log(response)
+        }).catch(e=>{
+            console.log(e);
+        });
     },
     beforeMount() {
         /*this.$services.generic.get({endpoint:'users'}).then(response=>{
