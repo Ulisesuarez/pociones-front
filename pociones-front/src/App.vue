@@ -32,7 +32,7 @@ export default {
             console.log(response);
             this.$store.dispatch('session/setAccount', response.data).catch((error) => {
                 console.warn(error);
-            })
+            });
         }).catch((error) => {
             console.warn(error);
         });

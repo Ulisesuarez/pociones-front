@@ -27,6 +27,10 @@ module.exports = (sequelize, Sequelize) => {
 			defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
 			field: 'updated_at',
 		},
+		creator: {
+			type: Sequelize.INTEGER,
+			foreignKey: true,
+		},
 	}, {
 		freezeTableName: true,
 		classMethods: {

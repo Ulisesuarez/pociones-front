@@ -1,6 +1,7 @@
 const db = require('../config/db.config.js');
 const Recipe = db.recipe;
 
+
 // Post a Recipe
 exports.create = (req, res) => {
 	// Save to PostgreSQL database
@@ -115,3 +116,18 @@ exports.findByIngredient = (req, res) => {
   }).catch(err => {
 		res.status(500).send("Error -> " + err);
 	})};
+
+exports.getCreatedRecipes = (req, res) => {
+	Recipe.findAll({
+		where: {
+			creator: req.params.creator
+		}
+	}).then(
+		recipes => {
+			res.send(recipes);
+		}
+	).catch(err => {
+		res.status(500).send("Error -> " + err);
+	});
+};
+

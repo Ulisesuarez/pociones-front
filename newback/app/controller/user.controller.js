@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const User = db.users;
+const recipeUser = db.recipeUser;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -176,4 +177,20 @@ exports.accountByToken = (req, res) => {
       }
     });
 };
+
+exports.getFavouriteRecipes =(req, res) => {
+	recipeUser.findAll({
+		where: {
+			userId: req.params.userId
+
+		}
+	}).then(
+		recipes => {
+			res.send(recipes);
+		}
+	).catch(err => {
+		res.status(500).send("Error -> " + err);
+	});
+};
+
 

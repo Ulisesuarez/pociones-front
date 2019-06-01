@@ -25,4 +25,9 @@ module.exports = function(app) {
 
     // account by token
    app.get('/api/details', user.accountByToken);
+
+
+
+    // get favourites recipes
+    app.get('/api/user/favourites', user.getFavouriteRecipes);
 };
