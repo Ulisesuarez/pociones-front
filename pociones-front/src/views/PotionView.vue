@@ -79,8 +79,8 @@ export default Vue.extend({
         drink: {},
         comments: [],
         user: {},
-        opinion: ''
-        }
+        opinion: '',
+        };
     },
     computed: {
         recipeId() {
