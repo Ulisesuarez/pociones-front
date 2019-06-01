@@ -103,23 +103,23 @@
     props: {
       whitelabel: {
         type: String,
-        default: ''
+        default: '',
       },
       logo: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
     watch: {
       mini: {
         immediate: true,
-        handler (val) {
+        handler(val) {
           this.$root.$emit('expand', val);
-        }
+        },
       },
       logo: {
         immediate: true,
-        handler (val) {
+        handler(val) {
           const imgWL = new Image();
           imgWL.onload = () => {
             this.idoniaLogo = imgWL.src;
@@ -156,7 +156,7 @@
       },
       backTo() {
         // window.location.href=window.location.hostname + '/myspace"
-        console.log(window)
+        console.log(window);
         window.location.href = 'http://0.0.0.0:8080/myspace';
       },
     },
