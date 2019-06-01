@@ -138,10 +138,10 @@
     data() {
       return {
         drawer: true,
-        idoniaLogo: '',
+        idoniaLogo: 'https://www.sccpre.cat/mypng/full/102-1027121_house-logo-clip-art-home-icon-green-png.png',
         items: [
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
-          { title: 'Potions', icon: 'star', route:'' },
+          { title: 'Potions', icon: 'local_library', route:'potionview' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Random', icon: 'local_bar', route: 'Random' },
         ],
