@@ -152,7 +152,7 @@ export default {
         return {
             showLogin: false,
             showRegister: false,
-            user:{},
+            user: {},
             loggedIn: false,
             showForgottenPassword: false,
             locales: [
@@ -166,21 +166,25 @@ export default {
                 document.getElementsByTagName('body')[0].clientWidth,
         };
     },
-    computed:{
+    computed: {
         logged(){
-            return  this.$store.state.session.token && this.$store.state.session.token  !== '' && this.$store.state.session.token !== null && typeof this.$store.state.session.token === 'string' && this.$store.state.session.token.length > 1
+            return  this.$store.state.session.token
+                && this.$store.state.session.token  !== ''
+                && this.$store.state.session.token !== null
+                && typeof this.$store.state.session.token === 'string'
+                && this.$store.state.session.token.length > 1;
         },
-        accountUser(){
-            return this.$store.state.session.account
-        }
+        accountUser() {
+            return this.$store.state.session.account;
+        },
 
     },
-    watch:{
-        logged(val){
-            this.loggedIn = val
-            console.log("LOGGED IN:", this.loggedIn)
+    watch: {
+        logged(val) {
+            this.loggedIn = val;
+            console.log("LOGGED IN:", this.loggedIn);
         },
-        accountUser:{
+        accountUser: {
             deep: true,
             handler(val){
                 const keys = Object.keys(val)
