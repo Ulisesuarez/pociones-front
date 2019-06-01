@@ -164,8 +164,8 @@ export default Vue.extend({
       },
     },
   methods: {
-      searchPotion(page){
-          this.$services.search({ingredients: this.ingredientsSelected, page:page, order:"created_at"})
+      searchPotion(page) {
+          this.$services.search({ingredients: this.ingredientsSelected, page, order: 'created_at'});
       },
       debugMe() {
           if (!this.ingredientsSelected.includes(this.selectedIngredient)) {
