@@ -79,32 +79,32 @@ export default Vue.extend({
         drink: {},
         comments: [],
         user: {},
-        opinion: ''
-        }
+        opinion: '',
+        };
     },
-    computed:{
-        recipeId(){
+    computed: {
+        recipeId() {
             return this.$route.params.id;
-        }
+        },
     },
     beforeMount() {
-      this.$services.generic.get({endpoint: `recipe/${this.recipeId}`}).then(response=>{
+      this.$services.generic.get({endpoint: `recipe/${this.recipeId}`}).then( (response) => {
           console.log(response.data);
           this.drink = response.data;
         }).catch((e) => {
           console.log(e);
         });
-      this.$services.generic.get({endpoint: `opinions/${this.recipeId}`}).then(response=>{
+      this.$services.generic.get({endpoint: `opinions/${this.recipeId}`}).then( (response) => {
           console.log(response);
       }).catch((e) => {
           console.log(e);
-      })
+      });
     },
     methods: {
         createComment() {
             console.log(this.opinion);
             this.$services.generic.post('opinion', {opinion: this.opinion, id_recipe: 9, id_user: 1})
-                .then(response => {
+                .then((response) => {
                 console.log(response);
             }).catch((e) => {
                 console.log(e);

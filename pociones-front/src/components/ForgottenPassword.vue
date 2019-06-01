@@ -3,7 +3,7 @@
     <v-dialog
       v-model="show"
       width="500"
-     
+
     >
       <v-card>
       <v-form v-model="valid" lazy-validation>
@@ -74,7 +74,7 @@
           accept() {
               this.$services.auth.forgottenPassword({email:this.email});
               this.$root.$emit('closeForgottenPassword');
-          }
+          },
       },
   };
 </script>
