@@ -86,6 +86,9 @@ export default Vue.extend({
         recipeId() {
             return this.$route.params.id;
         },
+        userId() {
+            return this.$store.state.session.account.id;
+        }
     },
     beforeMount() {
       this.$services.generic.get({endpoint: `recipe/${this.recipeId}`}).then( (response) => {
@@ -103,7 +106,8 @@ export default Vue.extend({
     methods: {
         createComment() {
             console.log(this.opinion);
-            this.$services.generic.post('opinion', {opinion: this.opinion, id_recipe: 9, id_user: 1})
+            console.log(this.userId);
+            this.$services.generic.post('opinion', {opinion: this.opinion, id_recipe: +this.recipeId, id_user: this.userId})
                 .then((response) => {
                 console.log(response);
             }).catch((e) => {
