@@ -19,4 +19,6 @@ module.exports = function(app) {
  
     // Delete a Recipe with Id
     app.delete('/api/recipe/:recipeId', recipe.delete);
+    
+    app.get('/api/recipes/search', recipe.findByIngredient);
 };

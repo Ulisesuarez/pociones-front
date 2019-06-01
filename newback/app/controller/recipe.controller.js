@@ -100,5 +100,18 @@ exports.delete = (req, res) => {
 
 
 exports.findByIngredient = (req, res) => {
-
-};
+	let ingredients = "'{" + req.body.ingredients.join(',') + "}'"
+	let category = '';
+	if (req.category && rq.category !== 'Any') {
+		category = "AND tag = '" + rq.body.category + "'";
+	}
+	sequelize.query("SELECT * FROM recipe WHERE id= ANY "+
+	"(SELECT recipe_id FROM (SELECT recipe_id, array_agg(ingredient_id)" +
+	" as ingredients FROM public.recipe_ingredient" +
+	" GROUP BY recipe_id) tmp" + 
+	"WHERE ingredients @> " + ingredients + ")" + category, { type: sequelize.QueryTypes.SELECT})
+  .then(recipes => {
+    res.status(200).send(recipes)
+  }).catch(err => {
+		res.status(500).send("Error -> " + err);
+	})};
