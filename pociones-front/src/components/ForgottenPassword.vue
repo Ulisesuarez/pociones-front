@@ -62,7 +62,7 @@
                   return this.forgottenShow;
               },
               set() {
-                  this.forgottenShow = !this.forgottenShow
+                  this.forgottenShow = !this.forgottenShow;
                   if (!this.forgottenShow) {
                       this.$root.$emit('closeForgottenPassword');
                   }
@@ -72,7 +72,7 @@
       },
       methods: {
           accept() {
-              this.$services.auth.forgottenPassword({email:this.email});
+              this.$services.auth.forgottenPassword({email: this.email});
               this.$root.$emit('closeForgottenPassword');
           },
       },
