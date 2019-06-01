@@ -7,6 +7,9 @@ module.exports = function(app) {
  
     // Retrieve all Recipe
     app.get('/api/recipes', recipe.findAll);
+
+    // get Created recipes
+    app.get('/api/recipe/created', recipe.getCreatedRecipes);
  
     // Retrieve a single Recipe by Id
     app.get('/api/recipe/:recipeId', recipe.findById);
@@ -19,4 +22,6 @@ module.exports = function(app) {
  
     // Delete a Recipe with Id
     app.delete('/api/recipe/:recipeId', recipe.delete);
+
+
 };
