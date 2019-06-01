@@ -114,28 +114,28 @@
       mini: {
         immediate: true,
         handler (val) {
-          this.$root.$emit('expand', val)
+          this.$root.$emit('expand', val);
         }
       },
       logo: {
         immediate: true,
         handler (val) {
-          let imgWL = new Image()
+          const imgWL = new Image();
           imgWL.onload = () => {
-            this.idoniaLogo = imgWL.src
-          }
+            this.idoniaLogo = imgWL.src;
+          };
           imgWL.onerror = () => {
-            let img = new Image()
+            const img = new Image();
             img.onload = () => {
-              this.idoniaLogo = img.src
-            }
-            img.src = val
-          }
-          imgWL.src = this.whitelabel + val
-        }
-      }
+              this.idoniaLogo = img.src;
+            };
+            img.src = val;
+          };
+          imgWL.src = this.whitelabel + val;
+        },
+      },
     },
-    data () {
+    data() {
       return {
         drawer: true,
         idoniaLogo: '',
@@ -143,24 +143,24 @@
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
           { title: 'Recent', icon: 'star', route: 'Recent' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
-          { title: 'Random', icon: 'local_bar', route: 'Random' }
+          { title: 'Random', icon: 'local_bar', route: 'Random' },
         ],
         mini: true,
-        right: null
-      }
+        right: null,
+      };
     },
     methods: {
-      goTo (route) {
-        this.mini = true
-        this.$router.push({ name: route })
+      goTo(route) {
+        this.mini = true;
+        this.$router.push({ name: route });
       },
-      backTo () {
+      backTo() {
         // window.location.href=window.location.hostname + '/myspace"
         console.log(window)
-        window.location.href = 'http://0.0.0.0:8080/myspace'
-      }
-    }
-  }
+        window.location.href = 'http://0.0.0.0:8080/myspace';
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
