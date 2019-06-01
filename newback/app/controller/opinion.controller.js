@@ -4,6 +4,7 @@ const Opinion = db.opinion;
 // Post a Opinion
 exports.create = (req, res) => {
     // Save to PostgreSQL database
+    
     Opinion.create({
         id_user: req.body.id_user,
         id_recipe: req.body.id_recipe,
