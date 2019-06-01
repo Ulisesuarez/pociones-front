@@ -24,18 +24,18 @@ export default {
     };
   },
     beforeMount() {
-        this.$store.dispatch('session/loadCookie').catch(error=>{
+        this.$store.dispatch('session/loadCookie').catch((error) => {
             console.warn(error);
         });
         this.$i18n.locale = this.$cookie.get('locale') || 'en';
-        this.$services.generic.get({endpoint:'details'}).then(response=>{
-            console.log(response)
-            this.$store.dispatch('session/setAccount', response.data).catch(error=>{
+        this.$services.generic.get({endpoint: 'details'}).then( (response) => {
+            console.log(response);
+            this.$store.dispatch('session/setAccount', response.data).catch((error) => {
                 console.warn(error);
             })
-        }).catch(error=>{
+        }).catch((error) => {
             console.warn(error);
-        })
+        });
     },
 };
 </script>

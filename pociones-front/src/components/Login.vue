@@ -104,7 +104,7 @@
       },
       methods: {
           accept() {
-              this.$store.dispatch('session/login', {email: this.email, password: this.password})
+              this.$store.dispatch('session/login', {email: this.email, password: this.password});
               this.$root.$emit('closeLogin');
           },
           cancel() {
@@ -113,7 +113,7 @@
           forgottenPassword() {
             this.$root.$emit('openForgottenPassword');
             this.$root.$emit('closeLogin');
-          }
+          },
       },
   };
 </script>
