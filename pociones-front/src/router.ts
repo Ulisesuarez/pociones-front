@@ -27,5 +27,10 @@ export default new Router({
       name: 'potion-view',
       component: PotionView,
     },
+    {
+      path: '/potion/10',
+      name: 'potions',
+      component: PotionView,
+    },
   ],
 });
