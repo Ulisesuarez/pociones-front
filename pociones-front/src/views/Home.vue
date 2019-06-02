@@ -77,7 +77,7 @@
                 <template v-for="(item, index) in results">
                     <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
                     <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-                    <v-list-tile v-else :key="item.id" avatar @click="">
+                    <v-list-tile v-else :key="item.id" avatar @click="goToPotion(item.id)">
                         <v-list-tile-avatar>
                             <img v-if="item.image" :src="item.image" alt="potion">
                             <v-icon v-else>{{item.icon}}</v-icon>
@@ -247,6 +247,9 @@ export default Vue.extend({
           }
           return description;
       },
+      goToPotion(potionId) {
+          this.$router.push(`potion/${potionId}`)
+      }
     },
 });
 </script>

@@ -249,7 +249,8 @@
                 this.$store.dispatch('session/setLocale', locale);
             },
             logout() {
-                console.log('ToDo');
+                console.log(this.$store);
+                this.$store.dispatch('session/logout', 'logout').catch( () => {});
             },
             refreshViewport() {
                 this.viewport = window.innerWidth && document.documentElement.clientWidth ?
