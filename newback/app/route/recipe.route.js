@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.post('/api/recipe', recipe.create);
  
     // Retrieve all Recipe
-    app.get('/api/recipes', recipe.findAll);
+    app.post('/api/recipes', recipe.findAll);
 
     // get Created recipes
     app.get('/api/recipe/created', recipe.getCreatedRecipes);
@@ -23,6 +23,6 @@ module.exports = function(app) {
     // Delete a Recipe with Id
     app.delete('/api/recipe/:recipeId', recipe.delete);
     
-    app.get('/api/recipes/search', recipe.findByIngredient);
+    app.post('/api/recipes/search', recipe.findByIngredient);
 
 };

@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 
 // FETCH all Recipes
 exports.findAll = (req, res) => {
-	Recipe.findAll({include:db.ingredient}).then(recipes => {
+	Recipe.findAll({include:db.ingredient, offset:req.body.offset, limit: req.body.limit}).then(recipes => {
 		// Send all Recipes to Client
 		res.send(recipes);
 	}).catch(err => {
@@ -101,16 +101,26 @@ exports.delete = (req, res) => {
 
 
 exports.findByIngredient = (req, res) => {
+	const db = require('../config/db.config.js');
+
 	let ingredients = "'{" + req.body.ingredients.join(',') + "}'"
 	let category = '';
-	if (req.category && rq.category !== 'Any') {
-		category = "AND tag = '" + rq.body.category + "'";
+	let offset = '';
+	let limit = '';
+	if (req.body.category && req.body.category !== 'Any') {
+		category = "AND tag = '" + req.body.category + "'";
 	}
-	sequelize.query("SELECT * FROM recipe WHERE id= ANY "+
-	"(SELECT recipe_id FROM (SELECT recipe_id, array_agg(ingredient_id)" +
+	if (req.body.offset && Number.isInteger(req.body.offset)){
+		offset = "OFFSET " +req.body.offset.toString()
+	}
+	if (req.body.limit && Number.isInteger(req.body.limit)){
+		offset = "LIMIT " +req.body.limit.toString()
+	}
+	db.sequelize.query("SELECT * FROM recipe WHERE id= ANY"+
+	" (SELECT recipe_id FROM (SELECT recipe_id, array_agg(ingredient_id)" +
 	" as ingredients FROM public.recipe_ingredient" +
 	" GROUP BY recipe_id) tmp" + 
-	"WHERE ingredients @> " + ingredients + ")" + category, { type: sequelize.QueryTypes.SELECT})
+	" WHERE ingredients @> " + ingredients + ")" + category + offset + limit, { type: db.sequelize.QueryTypes.SELECT})
   .then(recipes => {
     res.status(200).send(recipes)
   }).catch(err => {

@@ -17,10 +17,13 @@
                                         v-model="selectedIngredient"
                                         :hint="$t('omit brands if possible')"
                                         :items="ingredients"
+                                        item-text="name"
+                                        item-value="id"
                                         :label="$t('ingredient')"
                                         persistent-hint
                                         append-outer-icon="add"
                                         :append-outer-icon-cb="debugMe"
+                                        return-object
                                 >
                                     <div style="margin-left: 1em;" slot="no-data">
                                         <p >{{$t('No matches found   :(')}}</p>
@@ -29,6 +32,7 @@
                                 </v-autocomplete>
                                 <v-spacer></v-spacer>
                                 <v-select
+                                        v-model="selectedCategory"
                                         :items="categories"
                                         :label="$t('Category')"
                                 ></v-select>
@@ -44,12 +48,12 @@
                             <v-list two-line>
                                 <v-list-tile
                                         v-for="item in ingredientsSelected"
-                                        :key="item"
+                                        :key="item.id"
                                         avatar
                                         @click=""
                                 >
                                     <v-list-tile-content>
-                                        <v-list-tile-title>{{ item }}</v-list-tile-title>
+                                        <v-list-tile-title>{{ item.name }}</v-list-tile-title>
                                     </v-list-tile-content>
 
                                     <v-list-tile-action>
@@ -70,17 +74,17 @@
                 <v-card-title class="headline font-weight-regular blue-grey white--text">{{$t('Recipes')}}</v-card-title>
                 <v-card-text>
             <v-list three-line>
-                <template v-for="(item, index) in results.slice(0, 6)">
+                <template v-for="(item, index) in results">
                     <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
                     <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-                    <v-list-tile v-else :key="item.title" avatar @click="">
+                    <v-list-tile v-else :key="item.id" avatar @click="">
                         <v-list-tile-avatar>
-                            <img v-if="item.avatar" :src="item.avatar">
+                            <img v-if="item.image" :src="item.image" alt="potion">
                             <v-icon v-else>{{item.icon}}</v-icon>
                         </v-list-tile-avatar>
                         <v-list-tile-content>
-                            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                            <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                            <v-list-tile-title >{{ item.name}}</v-list-tile-title>
+                            <v-list-tile-sub-title v-html="expandRecipe(item)"></v-list-tile-sub-title>
                         </v-list-tile-content>
                     </v-list-tile>
                 </template>
@@ -89,7 +93,7 @@
                 <v-pagination style="margin-left: 100px;"
                         v-model="page"
                         circle
-                        :length="6"
+                        :length="4"
                 ></v-pagination>
             </v-card>
         </v-flex>
@@ -110,7 +114,9 @@ export default Vue.extend({
         arr = [];
         return {
             page: 1,
+            elementsPerPage:5,
             selectedIngredient: '',
+            selectedCategory:'Any',
             valid: true,
             ingredients: null,
             ingredientsSelected: arr,
@@ -121,21 +127,19 @@ export default Vue.extend({
     beforeCreate() {
         this.$services.generic.get({endpoint:'ingredients'}).then(response=>{
             console.log(response)
+            this.ingredients = response.data;
         }).catch(e=>{
             console.log(e);
         });
     },
     beforeMount() {
+        this.searchAll()
         /*this.$services.generic.get({endpoint:'users'}).then(response=>{
             console.log(response)
             }).catch(e=>{
             console.log(e);
         });
-        this.$services.generic.get({endpoint:'recipes'}).then(response=>{
-            console.log(response)
-          }).catch(e=>{
-            console.log(e);
-          });
+
           this.$services.generic.get({endpoint:'recipe/6'}).then(response=>{
               console.log(response)
           }).catch(e=>{
@@ -161,18 +165,59 @@ export default Vue.extend({
           }).catch(e=>{
               console.log(e);
           })*/
-      this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
+      /*this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
-              'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });
+              'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });*/
     },
     watch: {
       page(val) {
-          this.results = this.searchPotion(val);
+          if (typeof this.ingredientsSelected !== 'undefined' && this.ingredientsSelected.length > 0 ) {
+              this.searchPotion();
+          } else {
+              this.searchAll();
+          }
       },
+      ingredientsSelected:{
+          deep: true,
+          handler: function(val) {
+              if (typeof val !== 'undefined' && val.length > 0 ){
+                  this.searchPotion();
+              } else {
+                  this.searchAll();
+              }
+          },
+      },
+      selectedCategory(){
+          if (typeof this.ingredientsSelected !== 'undefined' && this.ingredientsSelected.length > 0 ) {
+              this.searchPotion();
+          } else {
+              this.searchAll();
+              // TODO cambiar a search by tag
+          }
+      }
     },
   methods: {
-      searchPotion(page) {
-          this.$services.search({ingredients: this.ingredientsSelected, page, order: 'created_at'});
+      searchAll() {
+          this.$services.generic.post('recipes',
+              {
+                  offset: (this.page - 1) * this.elementsPerPage,
+                  limit: (this.page) * this.elementsPerPage,}).then(response=>{
+              console.log(response);
+              this.results = response.data;
+          }).catch(e=>{
+              console.log(e);
+          });
+      },
+      searchPotion() {
+          this.$services.generic.post('recipes/search',{
+                  ingredients: this.ingredientsSelected.map((a)=>a.id),
+                  category: this.selectedCategory,
+                  order: 'created_at',
+                  offset: (this.page - 1) * this.elementsPerPage,
+                  limit: (this.page) * this.elementsPerPage,
+              }).then((response) =>{
+                  this.results = response.data;
+          } );
       },
       debugMe() {
           if (!this.ingredientsSelected.includes(this.selectedIngredient)) {
@@ -190,6 +235,17 @@ export default Vue.extend({
           console.log(ingredient);
           console.log(this.ingredientsSelected.findIndex((item) => item === ingredient));
           this.$delete(this.ingredientsSelected, this.ingredientsSelected.findIndex((item) => item === ingredient));
+      },
+      expandRecipe(item) {
+          let description = '';
+          if (item.ingredients){
+              description = this.$t('Ingredients: ') + item.ingredients.map((a)=>a.name).join(', ');
+          }
+          if (item.steps){
+              description = description + '<br> '  + this.$t('Steps: ') +
+                  item.steps.join(', ').substring(0,150) + '...';
+          }
+          return description;
       },
     },
 });
