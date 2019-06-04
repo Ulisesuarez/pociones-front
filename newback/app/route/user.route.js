@@ -26,7 +26,9 @@ module.exports = function(app) {
     // account by token
    app.get('/api/details', user.accountByToken);
 
+   app.post('/api/forgot', user.forgot);
 
+   app.post('/api/reset/password/', user.reset);
 
     // get favourites recipes
     app.get('/api/user/favourites', user.getFavouriteRecipes);

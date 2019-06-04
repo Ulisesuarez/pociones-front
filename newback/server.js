@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var expressLogging = require('express-logging');
 var logger = require('logops');
+var nodemailer = require('nodemailer');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

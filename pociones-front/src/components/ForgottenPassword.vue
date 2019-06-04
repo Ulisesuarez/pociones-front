@@ -72,7 +72,7 @@
       },
       methods: {
           accept() {
-              this.$services.auth.forgottenPassword({email: this.email});
+              this.$axios.post('forgot', {email: this.email});
               this.$root.$emit('closeForgottenPassword');
           },
       },

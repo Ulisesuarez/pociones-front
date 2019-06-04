@@ -4,6 +4,8 @@ const recipeUser = db.recipeUser;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
+const crypto = require('crypto-promise')
 const secret= '$2a$10$PHPA5OpVKgjPHPEZzmy6UNsqzkjuG2xGET1wp3bPHP9ET5dzphptHQ3eRvyXSSO';
 // Post a User
 exports.create = (req, res) => {
@@ -17,6 +19,7 @@ exports.create = (req, res) => {
 		role: req.body.role,
 		avatar: "https://api.adorable.io/avatars/204/abott@adorable.png"
 	}).then(user => {		
+
 		// Send created customer to client FALTA AÑADIR AVATAR
 		res.send(user);
 	}).catch(err => {
@@ -193,4 +196,79 @@ exports.getFavouriteRecipes =(req, res) => {
 	});
 };
 
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+         user: 'potionsofthedrunkenwitch@gmail.com',
+         pass: 'estoVieneHasheado'
+     }
+ });
+exports.forgot = (req, res)=> {
+	 var token
+	crypto.randomBytes(20).then(response=>{
+		token = response.toString('hex')	
+		User.findOne({ where: {email: req.body.email} }).then(user => {
+		if (!user) {
+			res.status(403).send("Error -> No user match this email ");
+		}
+		db.sequelize.query("INSERT INTO public.session("+
+			"user_id, token, expire_at, created_at, updated_at)"+
+			"VALUES ("+user.id.toString()+", '"+token+"', CURRENT_TIMESTAMP + INTERVAL '6 hour' , CURRENT_TIMESTAMP, NULL); ", { type: db.sequelize.QueryTypes.INSERT})
+			.then(response=>{
+				const mailOptions = {
+					from: 'potionsofthedrunkenwitch@gmail.com', // sender address
+					to: req.body.email, // list of receivers
+					subject: 'Potions forgoten password', // Subject line
+					html:'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+					'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+					' ' + req.headers.origin + '/reset/' + token + '/email/'+req.body.email+'\n\n' +
+					'If you did not request this, please ignore this email and your password will remain unchanged.\n'// plain text body
+				};
+				transporter.sendMail(mailOptions, function (err, info) {
+					if(err)
+						console.log(err)
+					else
+						res.status(200).send('Email sended');
+						console.log(info);
+			 });
+			}).catch(err => {
+				console.log(err)
+				res.status(500).send("Error -> " + err);
+			});
+	})
 
+	})
+	
+}
+exports.reset= (req, res)=> {
+	let expireAt;
+	let userID;
+	db.sequelize.query("SELECT user_id, expire_at 	FROM public.session "+
+	"WHERE token = '"+req.body.token+"';", { type: db.sequelize.QueryTypes.SELECT})
+			.then(response=>{
+				userID=response[0].user_id;
+				expireAt=response[0].expire_at;
+				bcrypt.hash(req.body.password, saltRounds)    // Store hash in your password DB.
+				.then(function(hash){
+				if (new Date(expireAt) > new Date()){
+					
+						User.update(
+							{password: hash},
+							{where: {id: userID}}
+						)
+						.then(response => {
+							res.status(200).send("Password updated")
+						}).catch(err => {
+							console.log(err)
+							res.status(500).send("Error -> " + err);
+						});
+				} else {
+					console.log("Expired token")
+					res.status(500).send("Error -> expired token");
+				}
+			}).catch(err => {
+				console.log(err)
+				res.status(500).send("Error -> " + err);
+			});
+		})
+		}

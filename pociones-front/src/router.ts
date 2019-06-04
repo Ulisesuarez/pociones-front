@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import PotionView from './views/PotionView.vue';
+import Reset from './views/Reset.vue';
 
 Vue.use(Router);
 
@@ -26,6 +27,12 @@ export default new Router({
       path: '/potion/:id',
       name: 'potion-view',
       component: PotionView,
+    },
+    {
+      path: '/reset/:token/email/:email',
+      name: 'reset',
+      component: Reset,
+      props: true,
     },
   ],
 });
