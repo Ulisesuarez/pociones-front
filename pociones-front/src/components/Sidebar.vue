@@ -141,7 +141,7 @@
         idoniaLogo: 'https://www.sccpre.cat/mypng/full/102-1027121_house-logo-clip-art-home-icon-green-png.png',
         items: [
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
-          { title: 'Potions', icon: 'local_library', route:'potionview' },
+          { title: 'Potions', icon: 'local_library', route:'potions', id:'5' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
           { title: 'Random', icon: 'local_bar', route: 'Random' },
         ],

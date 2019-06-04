@@ -5,7 +5,6 @@ import PotionView from './views/PotionView.vue';
 import Reset from './views/Reset.vue';
 
 Vue.use(Router);
-
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,

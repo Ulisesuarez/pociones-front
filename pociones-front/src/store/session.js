@@ -73,7 +73,7 @@ export default {
             commit('account', {});
             commit('loggedIn', false);
 
-            Vue.prototype.$services.auth.logout();
+            //Vue.prototype.$services.auth.logout();
             //router.push({ name: 'home' });
         },
     },
