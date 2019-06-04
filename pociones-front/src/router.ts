@@ -4,7 +4,6 @@ import Home from './views/Home.vue';
 import PotionView from './views/PotionView.vue';
 
 Vue.use(Router);
-
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -28,7 +27,7 @@ export default new Router({
       component: PotionView,
     },
     {
-      path: '/potion/10',
+      path: '/potion/',
       name: 'potions',
       component: PotionView,
     },
