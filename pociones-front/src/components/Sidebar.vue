@@ -143,16 +143,31 @@
           { title: 'My Recipes', icon: 'assignment', route: 'Recipes' },
           { title: 'Potions', icon: 'local_library', route:'potions', id:'5' },
           { title: 'Favorites', icon: 'star', route: 'Favorites' },
-          { title: 'Random', icon: 'local_bar', route: 'Random' },
+          { title: 'Random', icon: 'local_bar', route: `/potion/`, id: '5' },
         ],
         mini: true,
         right: null,
+        recipeIds: []
       };
+    },
+    beforeCreate() {
+    this.$services.generic.get({endpoint: `recipes`}).then( (response) => {
+          response.data.forEach(recipe => {
+            this.recipeIds.push(recipe.id);
+          });
+        }).catch((e) => {
+          console.log(e);
+        });
     },
     methods: {
       goTo(route) {
         this.mini = true;
-        this.$router.push({ name: route });
+        
+        if(route === '/potion/') {
+          route += this.recipeIds[Math.floor(Math.random() * this.recipeIds.length)] 
+        }
+        this.$router.push({ path: route });
+        location.reload();
       },
       backTo() {
 

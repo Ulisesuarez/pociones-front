@@ -8,6 +8,9 @@ module.exports = function(app) {
     // Retrieve all Recipe
     app.post('/api/recipes', recipe.findAll);
 
+    // Get all Recipe
+    app.get('/api/recipes', recipe.findAll);
+
     // get Created recipes
     app.get('/api/recipe/created', recipe.getCreatedRecipes);
  

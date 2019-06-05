@@ -150,21 +150,23 @@ export default Vue.extend({
               password: "estoVieneHasheado",
               email: "test3@msn.com",
               role: "user"
-
-
-          })
         this.$services.generic.post("recipe", {
-              name: 'whisky con hielo',
-              steps: ['agitar', 'beber'],
+              name: 'JägerBomb',
+              steps: ['Enfriar el Jägermeister',
+               'Echar el Jägermeister en un vaso de chupitos',
+               'Echar media lata de Red Bull en un vaso grande'],
               image: 'http://hielosmairena.com/wp-content/uploads/2018/10/whisky-con-hielo-1200x600.jpg',
               tag: 'Alcoholic',
-              ingredients:[1,2]
+              ingredients:[23,22,2]
           }
           ).then(response=>{
               console.log(response)
           }).catch(e=>{
               console.log(e);
-          })*/
+          })
+
+          })
+        */
       /*this.results.push({ icon: 'local_bar', title: 'Recipe to try', subtitle:
               '<span class=\'text--primary\'>Britta Holt</span> &mdash; ' +
               'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.' });*/
